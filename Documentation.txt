@@ -1,0 +1,75 @@
+1. Agence urbaine ?
+
+2. Ces missions ?
+
+3. Sa structure ?
+
+4. Chaque membre est son role ?
+
+5. C'est quoi la note de renseignement ?
+
+	La note de renseignement est une pièce administrative délivrée exclusivement 	
+	par l'Agence Urbaine,  informant le demandeur sur  l’affectation  réservée à son terrain par les dispositions réglementaires prévues par 
+	les  documents d’urbanisme, et le règlement applicable au secteur où se  situe  son  terrain. 
+	Pour générer  cette note il faut  tout  d’abord,  localiser  la  parcelle  demandée sur  
+	le plan  de  zonage  à partir  de  ses coordonnées  ou le  numéro  de son  titre foncier,  
+	ensuite  déterminer  les intersections spatiales de la parcelle avec les différentes zones du plan 
+	(par exemple avec la zone touristiques,  la zone industrielle, la zone habitat, l’espace vert, 
+	les équipements publiques, la voirie …).  Ce document facilite l'orientation du citoyen dans la 
+	consistance et la conception du projet à réaliser sur  le  terrain  en  question,  et  permet   
+	d’éviter  tous  les  blocages  techniques  et  administratifs (La situation du terrain par rapport 
+	au zonage, des normes urbanistiques à observer lors de la réalisation du projet et des Procédure 
+	à suivre en matière de constitution des dossiers).
+
+6. C'est quoi un document d'urbanisme ?
+
+	1. Plan d'aménagement ?
+
+	2. Plan de développement ?
+
+7. c'est quoi une titre foncier ?
+
+9. Les pièces exigés pour avoir la note de renseignement ?
+
+	1. Certificat de propriété ?
+
+        2. CIN
+
+	3. Plan cadastral ?
+
+	4. Calcul de contenance ?
+
+
+7. Comment se fait la demande de note de renseignement ?
+
+8. Est que les pièces changent en fonction de type de terrain ?
+
+	1. Immatriculé (mohafad)
+
+        2. non Immatriculé (ghayr mohafad)
+
+	3. Réquisition
+
+	4. Terrain couvert
+
+9. Type d'application? 
+
+10. Quels sont les acteurs ?
+
+11. Leurs fonctionalités ?
+
+12. Séquencement d'événement ?
+
+14. Composants de l'interface graphique GUI.
+
+15. Modèle de base de données.
+
+
+
+
+
+
+
+
+
+	
