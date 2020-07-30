@@ -1,6 +1,6 @@
-	*******************************************************************************
-								Documentation
-	*******************************************************************************
+*******************************************************************************
+							Documentation
+*******************************************************************************
 
 # Définition de quelque termes
 	
@@ -154,9 +154,9 @@
 			Copie de la CIN
 
 
-	*******************************************************************************
-								Analyse des besoins
-	*******************************************************************************
+*******************************************************************************
+							Analyse des besoins
+*******************************************************************************
 
 11. Type d'application? 
 
@@ -171,19 +171,21 @@
 13. Leurs fonctionalités ?
 	
 	1. Client : 
-		
-		1. Demander la fiche de renseignement en remplissant le formulaire 
+
+		1. Sign up + sign in.
+		2. Demander la fiche de renseignement en remplissant le formulaire 
 		   de demande.
-		2. Payment éléctronique.
-		3. Faire croiser la parcelle avec le plan d'aménagement.
-		4. Recevoir la note de renseignement (en cas ou elle est valide).
+		3. Payment éléctronique.
+		4. Faire croiser la parcelle avec le plan d'aménagement.
+		5. Recevoir la note de renseignement (en cas ou elle est valide).
 	
 	2. Le personnel de l'agence: 
 		
-		1. Faire croiser la parcelle avec le plan d'aménagement.
-		2. Vérification de la validité des pièces.
-		3. Signature éléctronique de note de renseignement.
-		4. Impression de la note de renseignement avec le code QR.
+		1. Sign up + sign in
+		2. Faire croiser la parcelle avec le plan d'aménagement.
+		3. Vérification de la validité des pièces.
+		4. Signature éléctronique de note de renseignement.
+		5. Impression de la note de renseignement avec le code QR.
 
 	3. Système :
 		
@@ -202,11 +204,11 @@
 			6. Changer l'échelle.
 			7. Imprimer les éléments visualisé avec une échelle prédefinie
 
-	*******************************************************************************
-								Conception
-	*******************************************************************************
+*******************************************************************************
+							Conception
+*******************************************************************************
 		
-14. Séquencement d'événement ?
+14. Séquencement d'événement
 
 15. Composants de l'interface graphique GUI.
 
