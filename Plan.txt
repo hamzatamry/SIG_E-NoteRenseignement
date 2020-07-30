@@ -1,0 +1,223 @@
+	*******************************************************************************
+								Documentation
+	*******************************************************************************
+
+# Définition de quelque termes
+	
+	1.	personnalité morale (الشخصية القانونية) : 
+			une entité doté de la personnalité juridique, 
+			ce qui lui permet d'etre directement titulaire 
+			de droits et d'obligations en lieu et place des personnes physiques 
+			qui la composent.
+			Exemple: (association, entreprise, agence urbaine) 
+	
+	2. Ressort territorial : 
+			L'etendue géographique dans lequel l'agence urbaine 
+			est titulaire des droits et d'obligations.
+			le siège de chacune des agences urbaines sont fixés 
+			par décret.
+	
+	3. L’urbanisme (تخطيط المدن): 
+			l’art d’aménager les villes ou encore la science de la ville.
+	
+	4. L'aménagement (تهيئة).
+
+	5. Titre foncier
+
+1. Agence urbaine ?
+	
+	Etablissement public doté de la personnalité morale et de l'autonomie financière
+	dont le ressort territorial	correspond à une ou plusieurs préfectures et/ou 
+	provinces. Elle est soumis à la tutelle de l'Etat laquelle a pour objet de 
+	faire respecter, par les organes compétents de l’agence, les dispositions du 
+	dahir portant création des agences urbaines, en particulier celles relatives 
+	aux missions qui lui sont dévolues et, de manière générale de veiller en ce 
+	qui la concerne, à l’application de la législation et de la réglementation 
+	concernant les établissements publics.
+
+2. Ces missions ?
+	
+	1. Programmer les projets de documents d’urbanisme réglementaires,
+	   notamment les plans d’aménagement et les plans 
+	   de développement.
+
+	2. Donner un avis conforme dans un délai maximum de 1 mois sur tous 
+	   les projets de lotissements, groupes d’habitations, morcellements et 
+	   constructions qui doivent lui être transmis, à cet effet, par les autorités 
+	   compétentes
+
+    3. Contrôler la conformité des lotissements, morcellements, groupes 
+	   d’habitations et constructions en cours de réalisation avec les dispositions 
+	   législatives et réglementaires en vigueur et avec les autorisations de lotir, 
+	   de morceler, de créer des groupes d’habitations ou de construire accordées
+
+3. Sa structure ?
+
+	L'agence urbaine de Settat a la structure suivante:
+
+		1. Directrice
+		2. Deux chargés de missions
+		3. quatre départements, chaque département contient des divisions et chaque
+			division contient de services:
+
+			1. Département Administratif et financier
+			2. Département de la gestion urbaine
+			3. Département des affaires juridiques et foncières
+			4. Département des études.
+
+4. Chaque membre est son role ?
+
+5. C'est quoi la note de renseignement ?
+
+	La note de renseignement est une pièce administrative délivrée exclusivement 	
+	par l'Agence Urbaine,  informant le demandeur sur  l’affectation  réservée à son terrain par les dispositions réglementaires prévues par 
+	les  documents d’urbanisme, et le règlement applicable au secteur où se  situe  son  terrain. 
+	Pour générer  cette note il faut  tout  d’abord,  localiser  la  parcelle  demandée sur  
+	le plan  de  zonage  à partir  de  ses coordonnées  ou le  numéro  de son  titre foncier,  
+	ensuite  déterminer  les intersections spatiales de la parcelle avec les différentes zones du plan 
+	(par exemple avec la zone touristiques,  la zone industrielle, la zone habitat, l’espace vert, 
+	les équipements publiques, la voirie …).  Ce document facilite l'orientation du citoyen dans la 
+	consistance et la conception du projet à réaliser sur  le  terrain  en  question,  et  permet   
+	d’éviter  tous  les  blocages  techniques  et  administratifs (La situation du terrain par rapport 
+	au zonage, des normes urbanistiques à observer lors de la réalisation du projet et des Procédure 
+	à suivre en matière de constitution des dossiers).
+
+6. C'est quoi un document d'urbanisme ?
+	
+	Le document d’urbanisme est un outil d’aménagement territoire.
+	
+	2. Exemples de document d'urbanisme
+		
+		1. Plan d'aménagement ?
+			
+			le document d’urbanisme réglementaire qui définit le droit d’utilisation du sol à 
+			l’intérieur des territoires auxquels il s’applique
+
+		2. Plan de développement ?
+	
+	3. document Opposable, homologué et non homologué 
+
+		homologué:  مصادق عليها
+		non homologué: غيرمصادق عليها
+
+7. c'est quoi une titre foncier ?
+
+8. Les pièces exigés pour avoir la note de renseignement ?
+
+	1. Certificat de propriété ?
+
+    2. CIN
+
+	3. Plan cadastral ?
+
+	4. Calcul de contenance ?
+
+9. Est que les pièces changent en fonction de type de terrain ?
+
+	1. Immatriculé (محفظ)
+
+	2. non Immatriculé (غيرمحفظ)
+
+	3. Réquisition 
+
+	4. Terrain couvert
+
+
+10. Comment se fait la demande de note de renseignement ?
+
+	Remplissage d'un formulaire avec jointure de documents scannés.
+	
+	Le formulaire contient :
+		
+		1. Renseignements sur le demandeur
+
+			profession du demandeur: ["architecte", "topographe", "notaire", "autre"]
+			nom
+			Prénom
+			CIN
+			ADRESSE
+			Téléphone mobile
+			Email
+			En qualité de: ["propriétaire", "professionel", "autre"]
+
+		2. Renseignements sur le terrain
+
+			SIS ?
+			COMMUNE ?
+			Titre foncier N° ou Réq N° ou propriété dite
+		
+		3. Fichies attachés:
+
+			Certificat du propriété / acte de propriété (si terrain non immatriculé)
+			Plan cadastral / levé topographique (si terrain non immatriculé)
+			Calcul de contenance (si terrain immatriculé)
+			Copie de la CIN
+
+
+	*******************************************************************************
+								Analyse des besoins
+	*******************************************************************************
+
+11. Type d'application? 
+
+	Application web, mobile cross-platform.
+
+12. Quels sont les acteurs ?
+	
+	1. Client.
+	2. Le personnel de l'agence.
+	3. Système
+
+13. Leurs fonctionalités ?
+	
+	1. Client : 
+		
+		1. Demander la fiche de renseignement en remplissant le formulaire 
+		   de demande.
+		2. Payment éléctronique.
+		3. Faire croiser la parcelle avec le plan d'aménagement.
+		4. Recevoir la note de renseignement (en cas ou elle est valide).
+	
+	2. Le personnel de l'agence: 
+		
+		1. Faire croiser la parcelle avec le plan d'aménagement.
+		2. Vérification de la validité des pièces.
+		3. Signature éléctronique de note de renseignement.
+		4. Impression de la note de renseignement avec le code QR.
+
+	3. Système :
+		
+		1. Back end
+		
+			1. Archivage des pièves à la demande.
+
+		2. Front end
+
+			1. Navigation libre (Zoom avant + arrière, déplacement) 
+			2. Permettre d'effectuer des recherches mutlicritères sur les éléments
+			   graphiques (nom d'une voie, Titre foncier)
+			3. Permettre de faire des recherches spatiales
+			4. Recherches par les coordonées lambert.
+			5. Restreindre les couches qu'il veut visualiser
+			6. Changer l'échelle.
+			7. Imprimer les éléments visualisé avec une échelle prédefinie
+
+	*******************************************************************************
+								Conception
+	*******************************************************************************
+		
+14. Séquencement d'événement ?
+
+15. Composants de l'interface graphique GUI.
+
+16. Modèle de base de données (SQL).
+
+
+
+
+
+
+
+
+
+	
