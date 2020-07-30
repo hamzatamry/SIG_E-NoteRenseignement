@@ -1,3 +1,7 @@
+	*******************************************************************************
+								Documentation
+	*******************************************************************************
+
 # Définition de quelque termes
 	
 	1.	personnalité morale (الشخصية القانونية) : 
@@ -49,6 +53,18 @@
 
 3. Sa structure ?
 
+	L'agence urbaine de Settat a la structure suivante:
+
+		1. Directrice
+		2. Deux chargés de missions
+		3. quatre départements, chaque département contient des divisions et chaque
+			division contient de services:
+
+			1. Département Administratif et financier
+			2. Département de la gestion urbaine
+			3. Département des affaires juridiques et foncières
+			4. Département des études.
+
 4. Chaque membre est son role ?
 
 5. C'est quoi la note de renseignement ?
@@ -79,8 +95,10 @@
 
 		2. Plan de développement ?
 	
-	3. Opposabilité, homologué, non homologué 
+	3. document Opposable, homologué et non homologué 
 
+		homologué:  مصادق عليها
+		non homologué: غيرمصادق عليها
 
 7. c'est quoi une titre foncier ?
 
@@ -96,18 +114,52 @@
 
 9. Est que les pièces changent en fonction de type de terrain ?
 
-	1. Immatriculé (mohafad)
+	1. Immatriculé (محفظ)
 
-	2. non Immatriculé (ghayr mohafad)
+	2. non Immatriculé (غيرمحفظ)
 
-	3. Réquisition
+	3. Réquisition 
 
 	4. Terrain couvert
 
 
 10. Comment se fait la demande de note de renseignement ?
 
+	Remplissage d'un formulaire avec jointure de documents scannés.
+	
+	Le formulaire contient :
+		
+		1. Renseignements sur le demandeur
+
+			profession du demandeur: ["architecte", "topographe", "notaire", "autre"]
+			nom
+			Prénom
+			CIN
+			ADRESSE
+			Téléphone mobile
+			Email
+			En qualité de: ["propriétaire", "professionel", "autre"]
+
+		2. Renseignements sur le terrain
+
+			SIS ?
+			COMMUNE ?
+			Titre foncier N° ou Réq N° ou propriété dite
+		
+		3. Fichies attachés:
+
+			Certificat du propriété / acte de propriété (si terrain non immatriculé)
+			Plan cadastral / levé topographique (si terrain non immatriculé)
+			Calcul de contenance (si terrain immatriculé)
+			Copie de la CIN
+
+
+	*******************************************************************************
+								Analyse des besoins
+	*******************************************************************************
+
 11. Type d'application? 
+
 	Application web, mobile cross-platform.
 
 12. Quels sont les acteurs ?
@@ -150,6 +202,9 @@
 			6. Changer l'échelle.
 			7. Imprimer les éléments visualisé avec une échelle prédefinie
 
+	*******************************************************************************
+								Conception
+	*******************************************************************************
 		
 14. Séquencement d'événement ?
 
