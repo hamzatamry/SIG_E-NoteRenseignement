@@ -178,6 +178,7 @@
 		3. Payment éléctronique.
 		4. Faire croiser la parcelle avec le plan d'aménagement.
 		5. Recevoir la note de renseignement (en cas ou elle est valide).
+		6. Impression de la note de renseignement avec le code QR.
 	
 	2. Le personnel de l'agence: 
 		
