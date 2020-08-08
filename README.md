@@ -8,6 +8,7 @@ Application mobile, web hybride et cross platform permettant la mise en place d'
 		1. navigate to your project folder
 		2. open your command prompt (windows)
 		3. run this command:
+			python -m venv nameOfvirtualEnvironement
 		4. Then we type this next command to activate the virtual environement
 			nameOfvirtualEnvironement\Scripts\activate
 		5. We type this command to install django on our virtual environement
