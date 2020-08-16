@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.contrib.postgres.fields import ArrayField
+
 
 class RequesterInformationNote(models.Model):
     nationalIdCard = models.CharField(max_length=50, null=True, unique=True)
@@ -8,8 +10,9 @@ class RequesterInformationNote(models.Model):
     address = models.CharField(max_length=250, null=True)
     phoneNumber = models.CharField(max_length=10, null=True)
     role = models.CharField(max_length=1, blank=False)
-    email = models.CharField(max_length=60, blank=True, unique=True)
+    email = models.EmailField(max_length=60, blank=True, unique=True)
     password = models.CharField(max_length=50, blank=False)
+    # token ?
 
 
 class AgencyStaff(models.Model):
@@ -17,21 +20,27 @@ class AgencyStaff(models.Model):
     firstName = models.CharField(max_length=50, blank=False)
     department = models.CharField(max_length=50, blank=False)
     job = models.CharField(max_length=50, blank=False)
-    role = models.CharField(max_length=1, blank=False)
+    role = models.CharField(blank=False,
+                            max_length=3,
+                            choices=(
+                                ('NIR', 'noteInformationRequester'),
+                                ('AS', 'agencyStaff')
+                            ))
     email = models.CharField(max_length=60, blank=False, unique=True)
     password = models.CharField(max_length=50, blank=False)
+    # token ?
 
 
 class Publication(models.Model):
-    description = models.CharField(max_length=500, blank=False)
-    # ??
-    # agencyStaff = models.ForeignKey()
+    description = models.TextField(max_length=500, blank=False)
+    file = models.FileField(upload_to='pub/files', null=True)
+    agencyStaff = models.ForeignKey(AgencyStaff, on_delete=models.CASCADE, null=True)
 
 
 class RequestInformationNote(models.Model):
     state = models.CharField(max_length=1, blank=False)
     sendingDate = models.DateField(auto_now=True)
-    # requesterInformationNote = models.ForeignKey()
+    requesterInformationNote = models.ForeignKey(RequesterInformationNote, on_delete=models.CASCADE, null=True)
 
 
 class FieldInformation(models.Model):
@@ -49,19 +58,23 @@ class AttachedDocument(models.Model):
     capacityCalculation = models.ImageField(upload_to='docs/cc')
 
 
+class CapacityCalculation(models.Model):
+    xCoordinates = ArrayField(models.FloatField(), null=True)
+    yCoordinates = ArrayField(models.FloatField(), null=True)
+    bounds = ArrayField(models.CharField(max_length=5), null=True)
+    reference = models.CharField(max_length=20, null=True)
+
+
 class RequestInformationContent(models.Model):
     pass
 
 
 class RequestInformationVerification(models.Model):
     pass
-    # ???
-    # requestInformationNote = models.ForeignKey()
 
 
-class CapacityCalculation(models.Model):
-    pass
-    # ???
+
+
 
 
 
