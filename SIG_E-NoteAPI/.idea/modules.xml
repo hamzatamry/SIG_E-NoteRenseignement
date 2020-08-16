@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../MovieRaterAPI/.idea/MovieRaterAPI.iml" filepath="$PROJECT_DIR$/../MovieRaterAPI/.idea/MovieRaterAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SIG_E-NoteAPI.iml" filepath="$PROJECT_DIR$/.idea/SIG_E-NoteAPI.iml" />
+    </modules>
+  </component>
+</project>

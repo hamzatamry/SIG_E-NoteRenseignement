@@ -12,11 +12,11 @@ Application mobile, web hybride et cross platform permettant la mise en place d'
 		4. Then we type this next command to activate the virtual environement
 			nameOfvirtualEnvironement\Scripts\activate
 		5. We type this command to install django on our virtual environement
-			pip3 install Django
+			pip install Django
 		6. To create a Django project we type this command:
 			django-admin startproject projectName .
 
-		   Notice: new folder created with some bunch of python files
+		    Notice: new folder created with some bunch of python files
 			   a manage.py file is created
 		7.a. To run the Django server we type this command:
 			python manage.py runserver
@@ -55,40 +55,38 @@ Application mobile, web hybride et cross platform permettant la mise en place d'
 		5.a. open pgAdmin4.
 		5.b. enter your password.
 		5.c. then open your Databases, choose your database then go to Schemas after that to tables, 
-		     then click on run button with a database icon named query tool.
-		     run this two commands:
-			CREATE EXTENSION postgis
-			CREATE EXTENSION postgis_raster 
-		For more informations visit the official (docs)[https://docs.djangoproject.com/fr/3.1/ref/contrib/gis/].
+		    then click on run button with a database icon named query tool, run these two commands:
+				CREATE EXTENSION postgis
+				CREATE EXTENSION postgis_raster 
+		For more informations visit the [official docs](https://docs.djangoproject.com/fr/3.1/ref/contrib/gis/).
 
 	6. Install OSGeo4W make sure you choose the version depending on python version
 		if python is 32 bite use OSGeo4W else use OSGeo4w64
 	7. Add these lines of code to settings.py at the beginning:
 		import os
 		if os.name == 'nt':
-    			import platform
-    			OSGEO4W = r"C:\OSGeo4W"
-    			if '64' in platform.architecture()[0]:
-        			OSGEO4W += "64"
-    			assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
-    			os.environ['OSGEO4W_ROOT'] = OSGEO4W
-    			os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
-    			os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
-    			os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+			import platform
+			OSGEO4W = r"C:\OSGeo4W"
+			if '64' in platform.architecture()[0]:
+				OSGEO4W += "64"
+			assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
+			os.environ['OSGEO4W_ROOT'] = OSGEO4W
+			os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
+			os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+			os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
 	8. Configure postgis with Django
 		1. Make sure you add 'django.contrib.gis' to INSTALLED_APP in settings.py
 		2. Change DATABASES Constant in setting.py to this:
 			DATABASES = {
-    				'default': {
-        				'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        				'USER': '<username>',
-        				'NAME': '<database name>',
-        				'PASSWORD': '<your paswword that you have entered>',
-        				'PORT': '5432'
+				'default': {
+					'ENGINE': 'django.contrib.gis.db.backends.postgis',
+					'USER': '<username>',
+					'NAME': '<database name>',
+					'PASSWORD': '<your paswword that you have entered>',
+					'PORT': '5432'
 
-    				}
+				}
 			}
-		3. 	
 	
 
 
