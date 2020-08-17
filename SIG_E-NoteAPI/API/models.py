@@ -11,6 +11,7 @@ class RequesterInformationNote(models.Model):
     phoneNumber = models.CharField(max_length=10, null=True)
     role = models.CharField(max_length=1, blank=False)
     email = models.EmailField(max_length=60, blank=True, unique=True)
+    username = models.CharField(max_length=30, blank=True, unique=True)
     password = models.CharField(max_length=50, blank=False)
     # token ?
 
@@ -27,6 +28,7 @@ class AgencyStaff(models.Model):
                                 ('AS', 'agencyStaff')
                             ))
     email = models.CharField(max_length=60, blank=False, unique=True)
+    username = models.CharField(max_length=30, blank=True, unique=True)
     password = models.CharField(max_length=50, blank=False)
     # token ?
 
