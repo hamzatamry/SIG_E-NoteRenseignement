@@ -60,6 +60,8 @@ For more informations visit [ionic docs](https://ionicframework.com/docs).
 	8. Go to the ionic v3 documentation, then to native, choose your plugin
 	   and you can read more about function and how to use them.
 
+
+
 # Documentation 
 	# C'est qui ArcGIS ?
 		ArcGIS est une suite de logiciels d'information géographique développés par la société américaine Esri

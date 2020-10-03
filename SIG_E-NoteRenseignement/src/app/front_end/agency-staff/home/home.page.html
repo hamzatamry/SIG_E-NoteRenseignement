@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="profil"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Agence Urbaine de Settat AUS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #publicationForm="ngForm" (ngSubmit)="publish(publicationForm)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-input 
+            type="text" 
+            name="title"
+            ngModel
+            maxlength="20"
+            required
+            placeholder="Votre titre de publication">
+          </ion-input>
+        </ion-card-title> 
+        <ion-card-subtitle>Hamza Tamry</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+
+        <ion-textarea 
+          name="text" 
+          ngModel
+          placeholder="Ajouter un texte à votre publication">
+        </ion-textarea>
+
+        <ion-button (click)="filePicker.click()">
+          <ion-icon name="download-outline"></ion-icon>
+          {{ getFileName(filePicker.value) }}
+        </ion-button>
+        
+        <input #filePicker
+          type="file" 
+          name="file"
+          ngModel
+          accept="application/pdf" />
+        <div>
+          <ion-button type="submit">Publier</ion-button>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </form>
+  
+
+  <ion-list>
+    <ion-card *ngFor="let pub of [1, 2, 3, 4, 5, 6, 7]">
+      <ion-card-header>
+        <ion-card-title>Titre de la publication</ion-card-title>
+        <ion-card-subtitle>Nom prenom</ion-card-subtitle>
+        <ion-label>date: 10/10/2020</ion-label>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-text>
+          zijgoizejigzeg
+          zeigjzioegjzoieg
+          zjoiegjzoiegjzeoi
+        </ion-text>
+        
+        <ion-list>
+          <ion-item *ngFor="let comment of [1, 2, 3]">
+            <ion-label position="stacked">Mohammed jizeoze</ion-label>
+            <ion-text>
+              zijgozejgoize
+              zeogjzejgzoeg
+              ziejgoizejgioze
+            </ion-text>
+          </ion-item>
+          
+
+          <form #commentForm="ngForm" (ngSubmit)="comment(commentForm)">
+            <ion-item>
+              <ion-textarea 
+                type="text" 
+                name="comment"
+                ngModel
+                required
+                maxlength="100"
+                placeholder="Votre commentaire...">
+              </ion-textarea>
+
+              <ion-button 
+                [disabled]="!commentForm.valid && commentForm.touched" 
+                type="submit">Envoyer<ion-icon name="send"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </form>
+          
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

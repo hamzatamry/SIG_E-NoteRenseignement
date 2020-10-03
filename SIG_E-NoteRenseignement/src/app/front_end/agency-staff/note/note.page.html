@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Liste des demandes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment #segment value="rp">
+    <ion-segment-button value="rp">
+      <ion-spinner name="lines"></ion-spinner>
+    </ion-segment-button>
+    <ion-segment-button value="rv">
+      <ion-icon name="shield-checkmark-sharp"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Liste des demandes en cours de traitement -->
+  <ion-list *ngIf="segment.value == 'rp'">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Numero de la demande (id)</ion-card-title>
+        <ion-card-subtitle>Date d'envoi</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        
+        <ion-slides pager>
+
+          <ion-slide>
+            <ion-list>
+              <ion-item-group>
+                <ion-item-divider color="primary">
+                  <ion-label>Identité</ion-label>
+                </ion-item-divider>
+      
+                <ion-item>
+                  <ion-label position="stacked">Nom</ion-label>
+                  <ion-text>zegzegzes</ion-text>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Prénom</ion-label>
+                  <ion-text>zerzerze</ion-text>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
+                  <ion-text>W462847</ion-text>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Profession</ion-label>
+                  <ion-text>Architecte</ion-text>
+                </ion-item>
+              </ion-item-group>
+              <ion-item-group>
+                <ion-item-divider color="primary">
+                  <ion-label>Coordonnées</ion-label>
+                </ion-item-divider>
+                <ion-item>
+                  <ion-label position="stacked">Email</ion-label>
+                  <ion-text>zegzeg@zjrzuei</ion-text>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-label position="stacked">Numéro de téléphone</ion-label>
+                  <ion-text>4894897</ion-text>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Adresse</ion-label>
+                  <ion-text>zjfzeizejoez</ion-text>
+                </ion-item>
+              </ion-item-group>
+
+            </ion-list>
+          </ion-slide>
+
+          <ion-slide>
+            <ion-list>
+              <ion-item-divider color="primary">
+                <ion-label>Renseignement sur le terrain</ion-label>
+              </ion-item-divider>
+
+              <ion-item>
+                <ion-label position="stacked">SIS</ion-label>
+                <ion-text>zegzeg</ion-text>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Commune</ion-label>
+                <ion-text>zegzegze</ion-text>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Terrain</ion-label>
+                <ion-text>zegze</ion-text>
+              </ion-item>
+    
+              <ion-item>
+                <ion-label position="stacked">N° Titre foncier (TF)</ion-label>
+                <ion-text>zegzefzer</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">N° Réquisition (Réq)</ion-label>
+                <ion-text>18497</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Propriété dite (PD)</ion-label>
+                <ion-text>489487</ion-text>
+              </ion-item>
+            </ion-list>
+            
+          </ion-slide>
+          
+          <ion-slide>
+          </ion-slide>
+
+          <ion-slide>
+          </ion-slide>
+  
+        </ion-slides>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- Liste des demandes déja traitées -->
+  <ion-list *ngIf="segment.value == 'rv'">
+
+  </ion-list>
+
+
+</ion-content>

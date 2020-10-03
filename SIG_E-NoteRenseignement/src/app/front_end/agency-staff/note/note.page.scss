@@ -1,0 +1,24 @@
+ion-card-content {
+    ion-grid {
+        height: 100%;
+        ion-row {
+            height: 50% !important;
+            ion-col {
+                height: 100% !important;
+                ion-card {
+                    --background: var(--ion-color-success-shade) !important;
+                    text-align: center !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important
+                }
+                ion-slides {
+                    text-align: center !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important    
+                }
+            }
+        }
+    }
+}

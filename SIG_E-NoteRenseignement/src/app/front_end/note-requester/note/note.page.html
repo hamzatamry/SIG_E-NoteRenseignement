@@ -1,0 +1,315 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>E-Note de renseignement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="requestForm" (ngSubmit)="upload()">
+    
+    <ion-slides #slides pager="true">
+
+      <ion-slide formGroupName="requesterForm">
+        
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Renseignement sur le demandeur</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-list>
+              <ion-item-group>
+                <ion-item-divider color="primary">
+                  <ion-label>Identité</ion-label>
+                </ion-item-divider>
+      
+                <ion-item>
+                  <ion-label position="stacked">Nom</ion-label>
+                  <ion-input 
+                    type="text" 
+                    formControlName="firstName">
+                  </ion-input>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Prénom</ion-label>
+                  <ion-input 
+                    type="text" 
+                    formControlName="lastName">
+                  </ion-input>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
+                  <ion-input 
+                    type="text" 
+                    formControlName="nationalIdCard">
+                  </ion-input>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-label position="stacked">Profession</ion-label>
+                  <ion-select formControlName="profession">
+                    <ion-select-option *ngFor="let profession of ['Architecte', 'Topographe', 'Notaire', 'Autre']" [value]="profession">
+                      {{ profession }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+      
+              </ion-item-group>
+        
+              <ion-item-group>
+                <ion-item-divider color="primary">
+                  <ion-label>Coordonnées</ion-label>
+                </ion-item-divider>
+                <ion-item>
+                  <ion-label position="stacked">Email</ion-label>
+                  <ion-input 
+                    type="email"
+                    formControlName="email">
+                  </ion-input>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-label position="stacked">Numéro de téléphone</ion-label>
+                  <ion-input 
+                    type="text" 
+                    formControlName="phoneNumber" 
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Adresse</ion-label>
+                  <ion-input  
+                    type="text" 
+                    formControlName="address">
+                  </ion-input>
+                </ion-item>
+              </ion-item-group>
+            </ion-list>
+            <div>
+              <ion-button [disabled]="!requestForm.get('requesterForm').valid" 
+                (click)="slideNextOrPrevious(true)">
+                Suivant
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-slide>
+      
+      <ion-slide formGroupName="fieldForm">
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Renseignement sur le terrain</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label position="stacked">SIS</ion-label>
+                <ion-input 
+                  type="text" 
+                  formControlName="groundInformationSector">
+                </ion-input>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Commune</ion-label>
+                <ion-input 
+                  type="text" 
+                  formControlName="municipality">
+                </ion-input>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Terrain</ion-label>
+                <ion-select 
+                  formControlName="field">
+                  <ion-select-option value="PD">Immatriculé</ion-select-option>
+                  <ion-select-option value="TF">Non Immatriculé</ion-select-option>
+                  <ion-select-option value="Réq">Réquisition</ion-select-option>
+                </ion-select>
+              </ion-item>
+    
+              <ion-item>
+                <ion-label position="stacked">N° Titre foncier (TF)</ion-label>
+                <ion-input 
+                  type="text" 
+                  formControlName="landTitleNumber">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">N° Réquisition (Réq)</ion-label>
+                <ion-input 
+                  type="text" 
+                  formControlName="requisitionNumber">
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Propriété dite (PD)</ion-label>
+                <ion-input 
+                  type="text" 
+                  formControlName="calledProperty">
+                </ion-input>
+              </ion-item>
+
+            </ion-list>
+
+            <div>
+              <ion-button (click)="slideNextOrPrevious(false)">
+                Retour
+              </ion-button>
+              <ion-button [disabled]="!requestForm.get('fieldForm').valid" (click)="slideNextOrPrevious(true)">
+                Suivant
+              </ion-button>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+    </ion-slide>
+      
+    <ion-slide formGroupName="documentForm">
+
+        <ion-card>
+
+          <ion-card-header>
+            <ion-card-title>
+              Liste de Documents à joindre
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            
+            <ion-list>
+              
+              <ion-item>
+                <ion-label position="stacked">Demande de la note de renseignements remplie et signée</ion-label>
+                <a href="https://ausettat.org/docs/15212020100312AM.pdf" target="_blank" >Télécharger la demande</a>
+                <ion-button (click)="filePicker.click()">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ getFileName(filePicker.value) }}
+                </ion-button>
+                <input #filePicker 
+                  type="file" (change)="onFileSelected($event, 0)"
+                  formControlName="RequestInformationNote"
+                  accept="application/pdf" />
+              </ion-item>
+  
+              <ion-item>
+                <ion-label position="stacked">Cerificat de propriété</ion-label>
+                <ion-button (click)="filePicker2.click()">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ getFileName(filePicker2.value) }}
+                </ion-button>
+                <input #filePicker2 
+                  type="file" (change)="onFileSelected($event, 1)"
+                  formControlName="ownershipCertificate"
+                  accept="application/pdf" />
+              </ion-item>
+  
+              <ion-item>
+                <ion-label position="stacked">Plan cadastral visé conforme</ion-label>
+                <ion-button (click)="filePicker3.click()">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ getFileName(filePicker3.value) }}
+                </ion-button>
+                <input #filePicker3  
+                  type="file" (change)="onFileSelected($event, 2)"
+                  formControlName="cadatralMap"
+                  accept="application/pdf" />
+              </ion-item>
+  
+              <ion-item>
+                <ion-label position="stacked">Copie de la carte d'identité nationale (CIN)</ion-label>
+                <ion-button (click)="filePicker4.click()">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ getFileName(filePicker4.value) }}
+                </ion-button>
+                <input #filePicker4 
+                  type="file" (change)="onFileSelected($event, 3)"
+                  formControlName="nationalIdCard"
+                  accept="application/pdf" />
+              </ion-item>
+  
+            </ion-list>
+
+            <div>
+              <ion-button (click)="slideNextOrPrevious(false)">
+                Retour
+              </ion-button>
+              <ion-button [disabled]="!requestForm.get('documentForm').valid" (click)="slideNextOrPrevious(true)">
+                Suivant
+              </ion-button>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+
+    </ion-slide> 
+    
+    <ion-slide formArrayName="capacityCalculationForm">
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Veuillez remplir le tableau de calcul de contenances</ion-card-title>
+          <ion-button (click)="addLineToTable()">Ajouter une ligne</ion-button>
+          <ion-button (click)="deleteLineFromTable()">Supprimer une ligne</ion-button>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>X</ion-col>
+              <ion-col>Y</ion-col>
+              <ion-col>Bornes</ion-col>
+              <ion-col>Références</ion-col>
+            </ion-row>
+
+            <ion-row *ngFor="let line of requestForm.get('capacityCalculationForm').controls; index as i" [formGroupName]="i">
+              <ion-col>
+                <ion-input 
+                  type="number" 
+                  step="0.000001"
+                  formControlName="x">
+                </ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input 
+                  type="number" 
+                  step="0.000001"
+                  formControlName="y">
+                </ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input 
+                  type="text" 
+                  formControlName="bound">
+                </ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input 
+                  type="text" 
+                  formControlName="reference">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+        </ion-card-content>
+        <div>
+          <ion-button (click)="slideNextOrPrevious(false)">
+            Retour
+          </ion-button>
+          <ion-button [disabled]="!requestForm.get('capacityCalculationForm').valid && !requestForm.valid" type="submit">
+            Envoyer
+          </ion-button>
+        </div>
+      </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </form>
+</ion-content>

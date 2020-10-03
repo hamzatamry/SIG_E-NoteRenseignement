@@ -1,0 +1,85 @@
+<ion-split-pane contentId="second-content"  when="false">
+  <ion-menu contentId="second-content" menuId="action">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>ArcGis</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+
+        <ion-menu-toggle>
+          <ion-item button (click)="gisPage.search()">
+            <ion-icon name="location-sharp"></ion-icon>
+            <ion-label>
+              Recherche par adresse
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item button>
+            <ion-icon name="search-circle-sharp"></ion-icon>
+            <ion-label>
+              Coordonnées Lambert
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item button>
+            <ion-icon name="analytics-sharp"></ion-icon>
+            <ion-label>
+              Analyse spatiale 
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item button>
+            <ion-icon name="layers-sharp"></ion-icon>
+            <ion-label>
+              Visualiser des couches 
+            </ion-label>
+          </ion-item>  
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item button (click)="gisPage.changeScale()">
+            <ion-icon name="expand-sharp"></ion-icon>
+            <ion-label>
+              Changer l'échelle 
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item button>
+            <ion-icon name="map-sharp"></ion-icon>
+            <ion-label>
+              Projection de parcelle
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      
+        <ion-menu-toggle>
+          <ion-item button (click)="gisPage.print()">
+            <ion-icon name="print-sharp"></ion-icon>
+            <ion-label>
+              Imprimer 
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+
+  <ion-router-outlet id="second-content"></ion-router-outlet>
+
+</ion-split-pane>
+
+

@@ -1,0 +1,133 @@
+<ion-split-pane contentId="content"  when="false">
+  <ion-menu contentId="content" menuId="profil">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Profile</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <form #profilForm="ngForm" (ngSubmit)="onSubmit()">
+        <ion-item-group>
+          <ion-item-divider color="primary">
+            <ion-label>Compte</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-label position="stacked">Nom d'utilisateur</ion-label>
+            <ion-text>{{ this.authService.username }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Role</ion-label>
+            <ion-text>{{ this.authService.role }}</ion-text>
+          </ion-item>
+        </ion-item-group>
+        
+        <ion-item-group>
+          <ion-item-divider color="primary">
+            <ion-label>Identité</ion-label>
+          </ion-item-divider>
+          
+          <ion-item>
+            <ion-label position="stacked">Nom</ion-label>
+            <ion-input 
+              type="text" 
+              name="lastName" 
+              [(ngModel)]="agencyStaffProfile.lastName">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Prénom</ion-label>
+            <ion-input 
+              type="text" 
+              name="firstName" 
+              [(ngModel)]="agencyStaffProfile.firstName">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Carte d'Identité Nationale (CIN)</ion-label>
+            <ion-input 
+              type="text"
+              name="nationalIdCard"
+              [(ngModel)]="agencyStaffProfile.nationalIdCard">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Profession</ion-label>
+            <ion-input 
+              type="text"
+              name="profession"
+              [(ngModel)]="agencyStaffProfile.profession">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Département ou Service</ion-label>
+            <ion-select name="department"
+              [(ngModel)]="agencyStaffProfile.department">
+              <ion-select-option *ngFor="let departement of departments">{{departement}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+  
+        <ion-item-group>
+          <ion-item-divider color="primary">
+            <ion-label>Coordonnées</ion-label>
+          </ion-item-divider>
+  
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input 
+              type="text"
+              name="email"
+              [(ngModel)]="agencyStaffProfile.email">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">N° Téléphone</ion-label>
+            <ion-input 
+              type="text"
+              name="phoneNumber"
+              [(ngModel)]="agencyStaffProfile.phoneNumber">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Adresse</ion-label>
+            <ion-input 
+              type="text"
+              name="address"
+              [(ngModel)]="agencyStaffProfile.address">
+            </ion-input>
+          </ion-item>
+        </ion-item-group>
+        
+        <ion-button type="submit" [disabled]="!profilForm.valid">
+          <ion-icon name="save-outline"></ion-icon>Sauvegarder
+        </ion-button>
+
+        <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button >
+            
+          </ion-fab-button>
+        </ion-fab> -->
+
+
+      </form>
+    </ion-content>
+  
+  </ion-menu>
+
+  <ion-router-outlet id="content"></ion-router-outlet>
+
+</ion-split-pane>

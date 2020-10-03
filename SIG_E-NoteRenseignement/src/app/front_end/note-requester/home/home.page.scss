@@ -1,0 +1,38 @@
+
+
+@media screen and (min-width: 400px)
+{
+    
+    ion-grid {
+        width: 50% !important;
+    }
+}
+
+
+
+
+ion-content {
+    ion-grid {
+        height: 100%;
+        ion-row {
+            height: 33% !important;
+            ion-col {
+                height: 100% !important;
+                ion-card {
+                    text-align: center !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important;
+                    border: 2px var(--ion-color-success-shade) solid !important;
+                }
+                ion-slides {
+                    text-align: center !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important    
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,64 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="3">
+        <ion-card>
+          <ion-card-content>
+            <form #authentificationForm="ngForm" (ngSubmit)="onSubmit(authentificationForm)">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="stacked">Nom d'utilisateur</ion-label>
+                  <ion-input 
+                    ngModel 
+                    type="text" 
+                    name="username" 
+                    placeholder="Ex: Mustapha35"
+                    maxlength="30"
+                    pattern="[a-zA-Z0-9]*"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Mot de passe</ion-label>
+                  <ion-input 
+                    ngModel 
+                    type="password" 
+                    name="password" 
+                    placeholder="Entrer votre mot de passe"
+                    maxlength="50"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Role</ion-label>
+                  <ion-select 
+                    ngModel
+                    name="role" 
+                    placeholder="Entrer votre role" 
+                    maxlength="2"
+                    required
+                  >
+                    <ion-select-option value="nr">Client</ion-select-option>
+                    <ion-select-option value="as">Personne de l'AUS</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+              <div>
+                <ion-button 
+                  [disabled]="!authentificationForm.valid" 
+                  type="submit" 
+                  expand="full" 
+                  shape="round"
+                >Se connecter</ion-button>
+              </div>
+            </form>
+          </ion-card-content>
+          <p>
+            Vous n'etes pas encore enregistré ? <a routerLink="/register">Créer un</a>. 
+          </p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

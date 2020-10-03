@@ -1,0 +1,32 @@
+<ion-split-pane contentId="content"  when="false">
+  <ion-menu contentId="content" menuId="side">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Compte</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-item-group>
+        <ion-item>
+          <ion-label position="stacked">Nom d'utilisateur</ion-label>
+          <ion-text>{{ this.authService.username }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Role</ion-label>
+          <ion-text>{{ this.authService.role === "c" ? "Client": "Personnel de l'AUS" }}</ion-text>
+        </ion-item>
+      </ion-item-group>
+        <div>
+          <ion-button (click)="logout()" color="primary" expand="full">
+            Se déconnecter
+          </ion-button>
+        </div>
+    </ion-content>
+  
+  </ion-menu>
+
+  <ion-router-outlet id="content"></ion-router-outlet>
+
+</ion-split-pane>
+
