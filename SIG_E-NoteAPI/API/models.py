@@ -1,79 +1,90 @@
 from django.contrib.gis.db import models
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField, HStoreField
+from django.contrib.auth.models import User
 
 
 class RequesterInformationNote(models.Model):
-    nationalIdCard = models.CharField(max_length=50, null=True, unique=True)
+    id = models.AutoField(primary_key=True)
+    nationalIdCard = models.CharField(max_length=50, null=True)
     lastName = models.CharField(max_length=50, null=True)
     firstName = models.CharField(max_length=50, null=True)
     profession = models.CharField(max_length=50, null=True)
     address = models.CharField(max_length=250, null=True)
     phoneNumber = models.CharField(max_length=10, null=True)
-    role = models.CharField(max_length=1, blank=False)
-    email = models.EmailField(max_length=60, blank=True, unique=True)
-    username = models.CharField(max_length=30, blank=True, unique=True)
-    password = models.CharField(max_length=50, blank=False)
-    # token ?
+    email = models.EmailField(max_length=60, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 class AgencyStaff(models.Model):
+    id = models.AutoField(primary_key=True)
+    nationalIdCard = models.CharField(max_length=50, blank=False, null=True)
     lastName = models.CharField(max_length=50, blank=False)
     firstName = models.CharField(max_length=50, blank=False)
     department = models.CharField(max_length=50, blank=False)
-    job = models.CharField(max_length=50, blank=False)
-    role = models.CharField(blank=False,
-                            max_length=3,
-                            choices=(
-                                ('NIR', 'noteInformationRequester'),
-                                ('AS', 'agencyStaff')
-                            ))
+    profession = models.CharField(max_length=50, blank=False)
     email = models.CharField(max_length=60, blank=False, unique=True)
-    username = models.CharField(max_length=30, blank=True, unique=True)
-    password = models.CharField(max_length=50, blank=False)
-    # token ?
+    phoneNumber = models.CharField(max_length=10, null=True)
+    address = models.CharField(max_length=250, null=True)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    date = models.DateField(auto_now_add=True, blank=False, null=True)
+    message = models.CharField(max_length=100, blank=False, null=True)
+    agencyStaff = models.ForeignKey(AgencyStaff, on_delete=models.CASCADE, null=True)
 
 
 class Publication(models.Model):
-    description = models.TextField(max_length=500, blank=False)
-    file = models.FileField(upload_to='pub/files', null=True)
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=50, blank=False, null=True)
+    date = models.DateField(auto_now=True, null=True)
+    description = models.TextField(max_length=500, blank=False, null=True)
+    files = ArrayField(models.FileField(upload_to='pub/files', null=True), size=10, null=True)
+    comments = models.ManyToManyField(Comment)
     agencyStaff = models.ForeignKey(AgencyStaff, on_delete=models.CASCADE, null=True)
 
 
 class RequestInformationNote(models.Model):
-    state = models.CharField(max_length=1, blank=False)
-    sendingDate = models.DateField(auto_now=True)
+    id = models.AutoField(primary_key=True)
+    state = models.CharField(max_length=10, blank=False, default='progress') # p for in progess
+    sendingDate = models.DateTimeField(auto_now=True)
     requesterInformationNote = models.ForeignKey(RequesterInformationNote, on_delete=models.CASCADE, null=True)
 
 
 class FieldInformation(models.Model):
+    id = models.AutoField(primary_key=True)
     groundInformationSector = models.CharField(max_length=50, blank=False)
     municipality = models.CharField(max_length=50, blank=False)
     landTitleNumber = models.IntegerField(null=True)
     requisitionNumber = models.IntegerField(null=True)
     calledProperty = models.CharField(max_length=50, null=True)
+    capacityCalculation = ArrayField(HStoreField(), size=10)
 
 
 class AttachedDocument(models.Model):
-    nationalIdCard = models.ImageField(upload_to='docs/nid')
-    ownershipCertificate = models.ImageField(upload_to='docs/oc')
-    cadatralMap = models.ImageField(upload_to='docs/cm')
-    capacityCalculation = models.ImageField(upload_to='docs/cc')
-
-
-class CapacityCalculation(models.Model):
-    xCoordinates = ArrayField(models.FloatField(), null=True)
-    yCoordinates = ArrayField(models.FloatField(), null=True)
-    bounds = ArrayField(models.CharField(max_length=5), null=True)
-    reference = models.CharField(max_length=20, null=True)
+    id = models.AutoField(primary_key=True)
+    requestInformationNote = models.FileField(upload_to='docs/rin', null=True)
+    ownershipCertificate = models.FileField(upload_to='docs/oc')
+    cadatralMap = models.FileField(upload_to='docs/cm')
+    nationalIdCard = models.FileField(upload_to='docs/nid')
 
 
 class RequestInformationContent(models.Model):
-    pass
+    id = models.AutoField(primary_key=True)
+    requestInformationNote = models.ForeignKey(RequestInformationNote, on_delete=models.CASCADE, null=False)
+    fieldInformation = models.ForeignKey(FieldInformation, on_delete=models.CASCADE, null=False)
+    attachedDocument = models.ForeignKey(AttachedDocument, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        unique_together = [['requestInformationNote', 'fieldInformation', 'attachedDocument'], ]
+        index_together = [['requestInformationNote', 'fieldInformation', 'attachedDocument'], ]
 
 
 class RequestInformationVerification(models.Model):
-    pass
-
+    id = models.AutoField(primary_key=True)
+    requesterInformation = models.ForeignKey(RequesterInformationNote, on_delete=models.CASCADE, null=True)
 
 
 

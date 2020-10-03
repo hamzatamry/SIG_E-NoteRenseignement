@@ -1,8 +1,14 @@
 from django.urls import path, include
-from .views import JsonCBV, SerializedListView
+from .views import *
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('register', RegistrationView)
+router.register('noteRequestInformation', RequestInformationNoteView)
+router.register('AgencyProfile', AgencyProfileView)
+
 
 urlpatterns = [
-    path('cbv/', JsonCBV.as_view()),
-    path('serialized/list/', SerializedListView.as_view())
-
+    path('', include(router.urls))
 ]
