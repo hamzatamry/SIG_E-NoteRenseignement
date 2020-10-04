@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
@@ -10,19 +11,32 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class SideMenuPage implements OnInit {
 
+  _username: string;
+  _role: string;
+
   agencyStaffProfile: AgencyStaffProfile = {};
 
-  departments: string[];
+  departments: string[] = [
+    'Administratif et financier',
+    'Gestion urbaine',
+    'Juridiques et foncières',
+    'Etudes',
+    'Informatique',
+    'Autre'
+  ];
 
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(private authService: AuthService, private http: HttpClient, private menuController: MenuController) {
 
   }
 
   ngOnInit() {
 
     console.log(this.authService.token);
+    
+    this._username = this.authService.username;
+    this._role = this.authService.role;
 
-    const SERVER_URL = `http://127.0.0.1:8000/api/AgencyProfile/`;
+    const SERVER_URL = `http://127.0.0.1:8000/api/agencyProfile/`;
 
     const HEADERS = {
       headers: {
@@ -33,21 +47,15 @@ export class SideMenuPage implements OnInit {
     this.http.get(SERVER_URL, HEADERS).subscribe(response => {
 
       this.agencyStaffProfile = response['agencyStaffProfile'] 
-
+      
 
       console.log(response);
     }, error => {
       console.log(error);
     });
     
-    this.departments = [
-      'Administratif et financier',
-      'Gestion urbaine',
-      'Juridiques et foncières',
-      'Etudes',
-      'Informatique',
-      'Autre'
-    ]
+    
+    
 
 
   }
@@ -57,7 +65,7 @@ export class SideMenuPage implements OnInit {
     console.log(this.authService.token);
     console.log(this.agencyStaffProfile); //
 
-    const SERVER_URL = `http://127.0.0.1:8000/api/AgencyProfile/`;
+    const SERVER_URL = `http://127.0.0.1:8000/api/agencyProfile/`;
 
     const HEADERS = {
       headers: {
@@ -79,14 +87,14 @@ export class SideMenuPage implements OnInit {
 
   logout() {
     console.log("log out");
+    this.authService.logout();
+
   }
 
 }
 
 export interface AgencyStaffProfile
 {
-  username?: string;
-  role?: string;
   lastName?: string;
   firstName?: string;
   nationalIdCard?: string;

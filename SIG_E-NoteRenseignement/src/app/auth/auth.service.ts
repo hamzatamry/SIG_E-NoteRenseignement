@@ -1,19 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private _id: string;
   private _username: string;
   private _role: string;
-
-  private _userId: string;
-  static _token: string;
-  private _isAuthenticated: boolean;
+  private _token: string;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,49 +19,47 @@ export class AuthService {
   }
 
   get userId(): string {
-    return this._userId;
+    return this._id;
   }
 
   get token(): string {
-    return AuthService._token;
+    return this._token;
   }
 
   get role(): string {
     return this._role;
   }
 
-  get isAuthenticated(): boolean {
-    return this._isAuthenticated;
-  }
-
-  set isAuthenticated(isAuthenticated: boolean) {
-    this._isAuthenticated = isAuthenticated;
-  }
-
   signUp(username: string, password: string, role: string, agencyKey?: string) {
 
-    this._isAuthenticated = false;
+    const SERVER_URL = "http://127.0.0.1:8000/api/register/";
+    const BODY = {
+      username: username,
+      password: password,
+      role: role,
+      agencyKey: agencyKey
+    };
 
-    this.http.post(`http://127.0.0.1:8000/api/register/`, {
-        username: username,
-        password: password,
-        role: role,
-        agencyKey: agencyKey
-      })
+    this.http.post(SERVER_URL, BODY)
       .subscribe((response: {id: string, username: string, role: string, token: string}) => {
         
         console.log(response);
 
+        this._id = response.id;
         this._username = response.username;
-        this._userId = response.id;
         this._role = response.role;
-        AuthService._token = response.token;
+        this._token = response.token;
 
-        if (AuthService._token) {
+        if (this._token) {
 
-          this._isAuthenticated = true; console.log("You are authorized");
+          localStorage.setItem("userData", JSON.stringify({
+            id: this._id,
+            username: this._username,
+            role: this._role,
+            token: this._token
+          }));
 
-          if (this._role === 'c') {
+          if (this._role === 'nr') {
             this.router.navigate(['/nr']);
           }
           else if (this._role === 'as') {
@@ -81,23 +76,32 @@ export class AuthService {
 
   login(username: string, password: string, role: string) {
 
-    this._isAuthenticated = false;
-
-    this.http.post(`http://127.0.0.1:8000/auth/`, {
+    const SERVER_URL = "http://127.0.0.1:8000/auth/";
+    const BODY = {
       username: username,
       password: password
-    }).subscribe((response: {userId: string, username: string, role: string, token: string}) => {
+    }
+
+    this.http.post(SERVER_URL, BODY)
+    .subscribe((response: {id: string, username: string, role: string, token: string}) => {
       
       console.log(response);
 
-      this._userId = response.userId;
+      this._id = response.id;
       this._username = response.username;
       this._role = role; //must be change to reponse.role
-      AuthService._token = response.token;
+      this._token = response.token;
 
-      if (AuthService._token) {
+      if (this._token) {
 
-        this._isAuthenticated = true; console.log("You are authorized");
+        console.log("You are authorized");
+
+        localStorage.setItem("userData", JSON.stringify({
+            id: this._id,
+            username: this._username,
+            role: this._role,
+            token: this._token
+        }));
 
         if (this._role === 'nr') {
           this.router.navigate(['/nr']);
@@ -116,12 +120,35 @@ export class AuthService {
     })
   }
 
+  autoLogin() {
+
+    const userData : {
+      id: string;
+      username: string;
+      role: string;
+      token: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) {
+      return;
+    }
+
+    if (userData.token) {
+      this._id = userData.id;
+      this._username = userData.username;
+      this._role = userData.role;
+      this._token = userData.token;
+    }
+  }
+
   logout() {
+    
     this._username = null;
-    this._userId = null;
+    this._id = null;
     this._role = null;
-    AuthService._token = null;
-    this._isAuthenticated = false;
+    this._token = null;
+    
+    localStorage.removeItem("userData");
     this.router.navigate(['/']);
   }
 

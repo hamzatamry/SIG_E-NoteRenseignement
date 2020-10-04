@@ -1,6 +1,6 @@
 <ion-content>
   
-  <ion-progress-bar *ngIf="isSenting" type="indeterminate"></ion-progress-bar>  
+  <ion-progress-bar type="indeterminate"></ion-progress-bar>  
 
     <ion-grid>
       <ion-row>
@@ -43,6 +43,7 @@
                       ngModel 
                       placeholder="Entrer votre role"
                       maxlength="2"
+                      pattern="(nr)|(as)"
                       required 
                     > 
                       <ion-select-option value="nr">Client</ion-select-option>

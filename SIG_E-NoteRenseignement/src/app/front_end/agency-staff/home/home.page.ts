@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
+import { NgForm } from '@angular/forms';
+import { MenuController } from '@ionic/angular';
 
 
 
@@ -10,10 +13,38 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  selectedFiles: File[] = [];
+  publications: Publication[] = [];
+
+  constructor(private authService: AuthService, 
+    private http: HttpClient, private menuController: MenuController) { }
 
   ngOnInit() {
-    
+  
+  }
+
+  ionViewWillEnter() {
+
+    this.menuController.enable(true, 'profile');
+
+    const SERVER_URL = "http://127.0.0.1:8000/api/publication/";
+
+    const HEADERS = {
+      headers: {
+        Authorization: "Token " + this.authService.token
+      }
+    };
+
+    this.http.get<Publication[]>(SERVER_URL, HEADERS).subscribe(response => {
+      console.log(response);
+
+      this.publications = response;
+
+      console.log(this.publications);
+    }, error => {
+      console.log(error);
+    });
+
   }
 
   getFileName(filePath: string) {
@@ -25,27 +56,95 @@ export class HomePage implements OnInit {
     return "Ajouter un fichier" ;
   }
 
-  publish(publishForm: HTMLFormElement) {
+  onFileSelected(event) {
 
-    let formSubmitted = {
+    this.selectedFiles.push(event.target.files[0]);
+
+  }
+
+  publish(publishForm: NgForm) {
+
+    console.log(this.authService.token);
+
+    if (!publishForm.valid) {
+      return;
+    }
+
+    const PUBLICATION = {
       title: publishForm.value.title,
-      text: publishForm.value.text,
-      file: publishForm.value.file,
+      description: publishForm.value.text,
       date: new Date().toISOString()
     }
 
+    const SERVER_URL = "http://127.0.0.1:8000/api/publication/";
 
 
+    const HEADERS = {
+      headers: {
+        Authorization: "Token " + this.authService.token
+      }
+    };
+
+    let formData = new FormData();
+
+    for (let index in this.selectedFiles) {
+      formData.append("file" + index, this.selectedFiles[index]);
+    }
+
+    formData.append("publication", JSON.stringify(PUBLICATION));
+
+    this.http.post(SERVER_URL, formData, HEADERS).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+
+    
+    console.log(PUBLICATION);
+    console.log(this.selectedFiles);
   }
 
-  comment(commentForm: HTMLFormElement) {
+  comment(commentForm: NgForm, publication_id: number) {
 
-    console.log(commentForm.value);
+    if (!commentForm.valid) {
+      return;
+    }
+
+    const SERVER_URL = "http://127.0.0.1:8000/api/comment/";
+
+    const HEADERS = {
+      headers: {
+        Authorization: "Token " + this.authService.token
+      }
+    };
+
+    const BODY = {
+      id: publication_id,
+      message: commentForm.value.message
+    };
+
+    console.log(BODY);
+
+    this.http.post(SERVER_URL, BODY, HEADERS).subscribe(response => {
+      console.log(response)
+    }, error => {
+      console.log(error);
+    });
+
+    console.log(this.authService.token);
   }
 
-  
+}
 
-
-
-
+interface Publication {
+  id?: number;
+  title?: string;
+  date?: string;
+  description?: string;
+  agencyStaff: {
+    id?: number;
+    nationalIdCard?: string;
+    lastName?: string;
+    firstName?: string;
+  };
 }

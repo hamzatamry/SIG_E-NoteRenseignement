@@ -21,10 +21,6 @@ const routes: Routes = [
         path: 'note',
         loadChildren: () => import('../note/note.module').then(m => m.NotePageModule)
       },
-      {
-        path: 'action-menu',
-        loadChildren: () => import('../action-menu/action-menu.module').then(m => m.ActionMenuPageModule)
-      }
     ]
   }
 ];

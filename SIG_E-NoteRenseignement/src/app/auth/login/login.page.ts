@@ -19,13 +19,17 @@ export class LoginPage implements OnInit {
     
     console.log(authentificationForm.value);
 
+    if (!authentificationForm.valid) {
+      return;
+    }
+
     const username = authentificationForm.value.username;
     const password = authentificationForm.value.password;
     const role = authentificationForm.value.role;
 
     this.authService.login(username, password, role);
 
-    authentificationForm.reset();
+    //authentificationForm.reset();
 
   }
 

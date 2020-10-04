@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button menu="profil"></ion-menu-button>
+      <ion-menu-button menu="profile"></ion-menu-button>
     </ion-buttons>
     <ion-title>Agence Urbaine de Settat AUS</ion-title>
   </ion-toolbar>
@@ -17,7 +17,7 @@
             type="text" 
             name="title"
             ngModel
-            maxlength="20"
+            maxlength="50"
             required
             placeholder="Votre titre de publication">
           </ion-input>
@@ -33,19 +33,30 @@
           placeholder="Ajouter un texte à votre publication">
         </ion-textarea>
 
-        <ion-button (click)="filePicker.click()">
-          <ion-icon name="download-outline"></ion-icon>
-          {{ getFileName(filePicker.value) }}
-        </ion-button>
+        <ion-toolbar>
+          <ion-buttons *ngFor="let file of selectedFiles">
+            <ion-item>
+              <ion-label>{{ getFileName(file.name) }}</ion-label>
+              <ion-icon></ion-icon>
+            </ion-item>
+          </ion-buttons>
+        </ion-toolbar>
+
+        <ion-toolbar>
+          <ion-buttons>
+            <ion-button type="submit">Publier</ion-button>
+            <ion-button (click)="filePicker.click()">
+              <ion-icon name="attach-outline"></ion-icon>
+            </ion-button>
+            
+            <input #filePicker
+              type="file" (change)="onFileSelected($event)"
+              name="file"
+              ngModel
+              accept="application/pdf" />
+          </ion-buttons>
+        </ion-toolbar>
         
-        <input #filePicker
-          type="file" 
-          name="file"
-          ngModel
-          accept="application/pdf" />
-        <div>
-          <ion-button type="submit">Publier</ion-button>
-        </div>
 
       </ion-card-content>
     </ion-card>
@@ -53,18 +64,16 @@
   
 
   <ion-list>
-    <ion-card *ngFor="let pub of [1, 2, 3, 4, 5, 6, 7]">
+    <ion-card *ngFor="let publication of publications">
       <ion-card-header>
-        <ion-card-title>Titre de la publication</ion-card-title>
-        <ion-card-subtitle>Nom prenom</ion-card-subtitle>
-        <ion-label>date: 10/10/2020</ion-label>
+        <ion-card-title>{{ publication.title }}</ion-card-title>
+        <ion-card-subtitle> {{ publication.agencyStaff.firstName + " " + publication.agencyStaff.lastName }} </ion-card-subtitle>
+        <ion-label> {{ publication.date }} </ion-label>
       </ion-card-header>
 
       <ion-card-content>
         <ion-text>
-          zijgoizejigzeg
-          zeigjzioegjzoieg
-          zjoiegjzoiegjzeoi
+          {{ publication.description }}
         </ion-text>
         
         <ion-list>
@@ -78,11 +87,11 @@
           </ion-item>
           
 
-          <form #commentForm="ngForm" (ngSubmit)="comment(commentForm)">
+          <form #commentForm="ngForm" (ngSubmit)="comment(commentForm, publication.id)">
             <ion-item>
               <ion-textarea 
                 type="text" 
-                name="comment"
+                name="message"
                 ngModel
                 required
                 maxlength="100"

@@ -10,19 +10,13 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterPage implements OnInit {
 
-  isSenting: boolean;
-
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
 
-    this.isSenting = false;
-
   }
 
   onSubmit(registrationForm: NgForm) {
-
-    this.isSenting = true;
 
     console.log(registrationForm.value)
 
@@ -39,9 +33,8 @@ export class RegisterPage implements OnInit {
 
     this.authService.signUp(username, password, role, agencyKey);
     
-    registrationForm.reset(); //reset the form
+    //registrationForm.reset(); //reset the form
 
-    this.isSenting = false;
   }
   
 }

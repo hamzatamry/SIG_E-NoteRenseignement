@@ -1,5 +1,5 @@
 <ion-split-pane contentId="content"  when="false">
-  <ion-menu contentId="content" menuId="profil">
+  <ion-menu contentId="content" menuId="profile">
     <ion-header>
       <ion-toolbar>
         <ion-title>Profile</ion-title>
@@ -8,12 +8,6 @@
 
     <ion-content>
 
-      <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-        <ion-fab-button>
-          <ion-icon name="log-in-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-
       <form #profilForm="ngForm" (ngSubmit)="onSubmit()">
         <ion-item-group>
           <ion-item-divider color="primary">
@@ -21,11 +15,11 @@
           </ion-item-divider>
           <ion-item>
             <ion-label position="stacked">Nom d'utilisateur</ion-label>
-            <ion-text>{{ this.authService.username }}</ion-text>
+            <ion-text> {{ _username }} </ion-text>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Role</ion-label>
-            <ion-text>{{ this.authService.role }}</ion-text>
+            <ion-text> {{ _role == 'as' ? "Personnel de l'agence": "Client" }} </ion-text>
           </ion-item>
         </ion-item-group>
         
@@ -111,14 +105,25 @@
             </ion-input>
           </ion-item>
         </ion-item-group>
+
+        <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>Se déconnecter
+        </ion-button>
         
         <ion-button type="submit" [disabled]="!profilForm.valid">
           <ion-icon name="save-outline"></ion-icon>Sauvegarder
         </ion-button>
+        
 
         <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
           <ion-fab-button >
             
+          </ion-fab-button>
+        </ion-fab> -->
+
+        <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+          <ion-fab-button>
+            <ion-icon name="log-in-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab> -->
 
