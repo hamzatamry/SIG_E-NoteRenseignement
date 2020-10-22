@@ -6,130 +6,110 @@
 
 <ion-content>
 
-  <ion-segment #segment value="rp">
-    <ion-segment-button value="rp">
-      <ion-spinner name="lines"></ion-spinner>
-    </ion-segment-button>
-    <ion-segment-button value="rv">
-      <ion-icon name="shield-checkmark-sharp"></ion-icon>
-    </ion-segment-button>
-  </ion-segment>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-segment #segment value="r">
+          <ion-segment-button value="p">
+            <ion-spinner name="lines"></ion-spinner>
+            En attente
+          </ion-segment-button>
+          <ion-segment-button value="v">
+            Valide
+            <ion-icon name="shield-checkmark-sharp"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="r">
+            Rejetée
+            <ion-icon name="close-circle-sharp"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
 
-  <!-- Liste des demandes en cours de traitement -->
-  <ion-list *ngIf="segment.value == 'rp'">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Numero de la demande (id)</ion-card-title>
-        <ion-card-subtitle>Date d'envoi</ion-card-subtitle>
-      </ion-card-header>
-      
-      <ion-card-content>
-        
-        <ion-slides pager>
 
-          <ion-slide>
-            <ion-list>
-              <ion-item-group>
-                <ion-item-divider color="primary">
-                  <ion-label>Identité</ion-label>
-                </ion-item-divider>
       
-                <ion-item>
-                  <ion-label position="stacked">Nom</ion-label>
-                  <ion-text>zegzegzes</ion-text>
-                </ion-item>
-      
-                <ion-item>
-                  <ion-label position="stacked">Prénom</ion-label>
-                  <ion-text>zerzerze</ion-text>
-                </ion-item>
-      
-                <ion-item>
-                  <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
-                  <ion-text>W462847</ion-text>
-                </ion-item>
-      
-                <ion-item>
-                  <ion-label position="stacked">Profession</ion-label>
-                  <ion-text>Architecte</ion-text>
-                </ion-item>
-              </ion-item-group>
-              <ion-item-group>
-                <ion-item-divider color="primary">
-                  <ion-label>Coordonnées</ion-label>
-                </ion-item-divider>
-                <ion-item>
-                  <ion-label position="stacked">Email</ion-label>
-                  <ion-text>zegzeg@zjrzuei</ion-text>
-                </ion-item>
-                
-                <ion-item>
-                  <ion-label position="stacked">Numéro de téléphone</ion-label>
-                  <ion-text>4894897</ion-text>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Adresse</ion-label>
-                  <ion-text>zjfzeizejoez</ion-text>
-                </ion-item>
-              </ion-item-group>
+        <!-- Liste des demandes en cours de traitement -->
+        <ion-list>
 
-            </ion-list>
-          </ion-slide>
+          <ng-container *ngFor="let request of requestInformationNotes">
 
-          <ion-slide>
-            <ion-list>
-              <ion-item-divider color="primary">
-                <ion-label>Renseignement sur le terrain</ion-label>
-              </ion-item-divider>
-
-              <ion-item>
-                <ion-label position="stacked">SIS</ion-label>
-                <ion-text>zegzeg</ion-text>
-              </ion-item>
-      
-              <ion-item>
-                <ion-label position="stacked">Commune</ion-label>
-                <ion-text>zegzegze</ion-text>
-              </ion-item>
-      
-              <ion-item>
-                <ion-label position="stacked">Terrain</ion-label>
-                <ion-text>zegze</ion-text>
-              </ion-item>
+            <ion-card *ngIf="request.state == segment.value" 
+              [routerLink]="['verification', request.id]" [queryParams]="{state: request.state}"
+              color="primary">
+              <ion-card-content >
+                <ion-item color="primary">
+                  <ion-label>Numéro de la demande</ion-label>
+                  <ion-text>{{ request.id }}</ion-text>
+                </ion-item>
     
-              <ion-item>
-                <ion-label position="stacked">N° Titre foncier (TF)</ion-label>
-                <ion-text>zegzefzer</ion-text>
-              </ion-item>
-
-              <ion-item>
-                <ion-label position="stacked">N° Réquisition (Réq)</ion-label>
-                <ion-text>18497</ion-text>
-              </ion-item>
-
-              <ion-item>
-                <ion-label position="stacked">Propriété dite (PD)</ion-label>
-                <ion-text>489487</ion-text>
-              </ion-item>
-            </ion-list>
+                <ion-item color="primary">
+                  <ion-label>Date d'envoi</ion-label>
+                  <ion-text>{{ request.sendingDate }}</ion-text>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
             
-          </ion-slide>
-          
-          <ion-slide>
-          </ion-slide>
 
-          <ion-slide>
-          </ion-slide>
+            <!-- <ion-card >
+              <ion-card-header>
+                <ion-card-title>Numero de la demande {{ request.id }}</ion-card-title>
+                <ion-card-subtitle>Date d'envoi {{ request.sendingDate }}</ion-card-subtitle>
+              </ion-card-header>
+              
+              <!-- <ion-card-content>
+                <ion-item-divider color="primary">
+                  <ion-label>Identité du demandeur</ion-label>
+                </ion-item-divider>
+                <ion-list>
+                  <ion-item>
+                    <ion-label position="stacked">Nom</ion-label>
+                    <ion-text>{{ request.requesterInformationNote.lastName }}</ion-text>
+                  </ion-item>
+        
+                  <ion-item>
+                    <ion-label position="stacked">Prénom</ion-label>
+                    <ion-text>{{ request.requesterInformationNote.firstName }}</ion-text>
+                  </ion-item>
+        
+                  <ion-item>
+                    <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
+                    <ion-text>{{ request.requesterInformationNote.nationalIdCard }}</ion-text>
+                  </ion-item>
+        
+                  <ion-item>
+                    <ion-label position="stacked">Profession</ion-label>
+                    <ion-text>{{ request.requesterInformationNote.profession }}</ion-text>
+                  </ion-item>
+
+                  <ion-item-group>
+                    <ion-item-divider color="primary">
+                      <ion-label>Coordonnées</ion-label>
+                    </ion-item-divider>
+                    <ion-item>
+                      <ion-label position="stacked">Email</ion-label>
+                      <ion-text>{{ request.requesterInformationNote.email }}</ion-text>
+                    </ion-item>
+                    
+                    <ion-item>
+                      <ion-label position="stacked">Numéro de téléphone</ion-label>
+                      <ion-text>{{ request.requesterInformationNote.phoneNumber }}</ion-text>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">Adresse</ion-label>
+                      <ion-text>{{ request.requesterInformationNote.address }}</ion-text>
+                    </ion-item>
+                  </ion-item-group>
+                </ion-list> -->
+            <!-- </ion-card> --> 
+          </ng-container>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   
-        </ion-slides>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
-
-  <!-- Liste des demandes déja traitées -->
-  <ion-list *ngIf="segment.value == 'rv'">
-
-  </ion-list>
-
+  <ion-infinite-scroll threshold="5%" (ionInfinite)="loadMoreNoteRequests($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Chargement de plus de demandes...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { GisPage } from '../gis/gis.page';
-import { Printer } from '@ionic-native/printer/ngx';
 
 @Component({
   selector: 'app-action-menu',

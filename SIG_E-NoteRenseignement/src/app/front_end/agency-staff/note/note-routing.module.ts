@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: NotePage
+  },
+  {
+    path: 'verification/:note_id',
+    loadChildren: () => import('../verification/verification.module').then( m => m.VerificationPageModule)
   }
 ];
 

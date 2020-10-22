@@ -3,14 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TabBarPage } from './tab-bar.page';
 
-const routes: Routes = [
+const routes: Routes = [ 
   {
-    path: '',
-    redirectTo: 'side-menu',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
+    path: 'tab-bar',
     component: TabBarPage,
     children: [
       {
@@ -19,10 +14,15 @@ const routes: Routes = [
       },
       {
         path: 'note',
-        loadChildren: () => import('../note/note.module').then(m => m.NotePageModule)
+        loadChildren: () => import('../note/note.module').then(m => m.NotePageModule),
       },
     ]
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'tab-bar/side-menu',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

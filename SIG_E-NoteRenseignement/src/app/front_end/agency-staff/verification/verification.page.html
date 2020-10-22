@@ -1,0 +1,215 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/as/tab-bar/note"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "Vérification de la demande numéro " + request.id }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>La demande de note de renseignement N° {{ request.id }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-item-group>
+              <ion-item-divider color="primary">
+                <ion-label>Identité du demandeur</ion-label>
+              </ion-item-divider>
+
+              <ion-item>
+                <ion-label position="stacked">Nom</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.lastName }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Prénom</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.firstName }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.nationalIdCard }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Profession</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.profession }}</ion-text>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group>
+              <ion-item-divider color="primary">
+                <ion-label>Coordonnées du demandeur</ion-label>
+              </ion-item-divider>
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.email }}</ion-text>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label position="stacked">Numéro de téléphone</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.phoneNumber }}</ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Adresse</ion-label>
+                <ion-text>{{ requestDetail.requesterInformationNote?.address }}</ion-text>
+              </ion-item>
+            </ion-item-group>
+            <ion-item-group>
+              <ion-item-divider color="primary">
+                <ion-label>Renseignements sur le terrain</ion-label>
+              </ion-item-divider>
+
+              <ion-item>
+                <ion-label position="stacked">SIS</ion-label>
+                <ion-text>{{ requestDetail.landTitleNumber }}</ion-text>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Commune</ion-label>
+                <ion-text>{{ requestDetail.municipality }}</ion-text>
+              </ion-item>
+      
+              <ion-item>
+                <ion-label position="stacked">Terrain</ion-label>
+                <ion-text>{{ requestDetail.groundInformationSector }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">N° Titre foncier (TF)</ion-label>
+                <ion-text>{{ requestDetail.landTitleNumber }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">N° Réquisition (Réq)</ion-label>
+                <ion-text>{{ requestDetail.requisitionNumber }}</ion-text>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="stacked">Propriété dite (PD)</ion-label>
+                <ion-text>{{ requestDetail.calledProperty }}</ion-text>
+              </ion-item>
+
+              <!-- <ngx-qrcode class="aClass" 
+                  elementType="img" 
+                  [value]="requestDetail.nationalIdCard"
+                  cssClass="aclass"
+                  errorCorrectionLevel="L">
+              </ngx-qrcode> -->
+            </ion-item-group>
+
+
+            <ion-item-group>
+              <ion-item-divider color="primary">
+                <ion-label>Documents attachés</ion-label>
+              </ion-item-divider>
+
+              <ion-item button (click)="downloadFile(0, requestDetail.requestInformationNote)">
+                <ion-label position="stacked">Demande de note de renseignement</ion-label>
+                <ion-text>{{ requestDetail.requestInformationNote }}</ion-text>
+              </ion-item>
+
+              <ion-item button (click)="downloadFile(1, requestDetail.ownershipCertificate)">
+                <ion-label position="stacked">Certificat de propriété</ion-label>
+                <ion-text>{{ requestDetail.ownershipCertificate }}</ion-text>
+              </ion-item>
+
+              <ion-item button (click)="downloadFile(2, requestDetail.cadatralMap)">
+                <ion-label position="stacked">Calcul de contenance</ion-label>
+                <ion-text>{{ requestDetail.cadatralMap }}</ion-text>
+              </ion-item>
+
+              <ion-item button (click)="downloadFile(3, requestDetail.nationalIdCard)">
+                <ion-label position="stacked">Carté d'Identité Nationale (CIN)</ion-label>
+                <ion-text>{{ requestDetail.nationalIdCard }}</ion-text>
+              </ion-item>
+            </ion-item-group>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Etat de la note de renseignement</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form #verificationForm="ngForm" (ngSubmit)="save(verificationForm)">
+                <ion-item>
+                  <ion-label position="stacked">Veuillez préciser l'état de la demande</ion-label>
+                  <ion-select #select name="state" [(ngModel)]="request.state" patter="p|v|r">
+                    <ion-select-option value="p">En progression</ion-select-option>
+                    <ion-select-option value="v">Oui</ion-select-option>
+                    <ion-select-option value="r">Non</ion-select-option>
+                  </ion-select>
+                </ion-item>
+  
+                <ion-item *ngIf="select.value == 'r'">
+                  <ion-label position="stacked">En cas de rejet, ajouter une description</ion-label>
+                  <ion-textarea name="rejection_message" 
+                    [(ngModel)]="requestDetail.rejection_message" pattern="[a-zA-Z0-9]+" 
+                    required
+                    autoGrow
+                    rows="1">
+                  </ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">La clé de validation d'action</ion-label>
+                  <ion-input ngModel name="validation_key" type="password" required placeholder="Entrez le mot de passe"></ion-input>
+                </ion-item>
+
+                <div>
+                  <ion-button expand="full" [disabled]="!verificationForm.valid" type="submit">Sauvegarder</ion-button>
+                  <ion-button expand="full" *ngIf="request.state == 'v'" (click)="printPdf(verificationForm)" color="success">
+                    Imprimer la note de renseigement
+                  </ion-button>
+                </div>
+                
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+          <ion-card *ngIf="request.state == 'v'">
+            <ion-card-header>
+              <ion-card-title>Envoi de la demande en cas valide</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+
+              <ion-item>
+                <ion-label position="stacked">Demande de note de renseignement</ion-label>
+                <ion-button fill="outline" (click)="filePicker.click()">
+                  <ion-icon name="download-outline"></ion-icon>
+                  {{ getFileName(filePicker.value) }}
+                </ion-button>
+              </ion-item>
+              
+              
+              <form #informationNoteForm="ngForm" (ngSubmit)="sendInformationNote(informationNoteForm)">
+                
+                <input #filePicker
+                type="file" (change)="onFileSelected($event)"
+                name="file"
+                required
+                ngModel
+                accept="application/pdf" />
+
+                <ion-item>
+                  <ion-label position="stacked">La clé de validation d'action</ion-label>
+                  <ion-input ngModel name="upload_key" type="password" required placeholder="Entrez le clé de validation"></ion-input>
+                </ion-item>
+                <div>
+                  <ion-button type="submit" [disabled]="!informationNoteForm.valid" expand="full">Envoyer</ion-button>
+                </div>
+              </form>
+            </ion-card-content>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

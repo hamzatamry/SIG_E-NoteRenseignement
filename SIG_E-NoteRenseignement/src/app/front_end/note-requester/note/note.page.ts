@@ -4,12 +4,12 @@ import { FormGroup, FormControl, FormArray, Validators, Form } from '@angular/fo
 import { AuthService } from 'src/app/auth/auth.service';
 
 
-
 @Component({
   selector: 'app-note',
   templateUrl: './note.page.html',
   styleUrls: ['./note.page.scss'],
 })
+
 export class NotePage implements OnInit {
 
   @ViewChild('slides') slides: HTMLIonSlidesElement;
@@ -140,7 +140,7 @@ export class NotePage implements OnInit {
   
     formData.append('data', JSON.stringify(this.requestForm.value));
 
-    const SERVER_URL = "http://127.0.0.1:8000/api/noteRequestInformation/";
+    const SERVER_URL = "http://192.168.1.103:8000/api/noteRequestInformation/";
     
     const headers = {
       headers: {

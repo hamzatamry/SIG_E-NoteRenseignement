@@ -1,3 +1,31 @@
 input[type="file"] {
     visibility: hidden;
 }
+
+
+// ion-label {
+//     color: white !important;
+// }
+
+// ion-item, ion-toolbar, ion-card {
+//     --background:  #383a3e !important;
+// }
+
+ion-textarea, ion-text, ion-item-divider {
+    font-size: larger !important;
+}
+
+
+a:hover {
+    text-decoration: underline;
+    color: #428cff;
+    cursor: pointer;
+}
+
+// ion-list {
+//     padding: 0% !important;
+// }
+
+ion-icon:hover {
+    background-color: #428cff !important;
+}

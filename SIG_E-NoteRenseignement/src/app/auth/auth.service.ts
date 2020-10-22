@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private _role: string;
   private _token: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private platform: Platform) { }
 
   get username(): string {
     return this._username;
@@ -32,7 +33,10 @@ export class AuthService {
 
   signUp(username: string, password: string, role: string, agencyKey?: string) {
 
-    const SERVER_URL = "http://127.0.0.1:8000/api/register/";
+
+    const SERVER_URL = "http://192.168.1.103/api/register/";
+    
+    
     const BODY = {
       username: username,
       password: password,
@@ -76,7 +80,8 @@ export class AuthService {
 
   login(username: string, password: string, role: string) {
 
-    const SERVER_URL = "http://127.0.0.1:8000/auth/";
+    const SERVER_URL = "http://192.168.1.103:8000/auth/"
+    
     const BODY = {
       username: username,
       password: password
@@ -86,6 +91,7 @@ export class AuthService {
     .subscribe((response: {id: string, username: string, role: string, token: string}) => {
       
       console.log(response);
+    
 
       this._id = response.id;
       this._username = response.username;

@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
+import { DataManagerService } from '../data-manager.service';
 
 
 @Component({
@@ -14,7 +17,7 @@ export class SideMenuPage implements OnInit {
   _username: string;
   _role: string;
 
-  agencyStaffProfile: AgencyStaffProfile = {};
+  public agencyStaffProfile: AgencyStaffProfile = {};
 
   departments: string[] = [
     'Administratif et financier',
@@ -25,7 +28,8 @@ export class SideMenuPage implements OnInit {
     'Autre'
   ];
 
-  constructor(private authService: AuthService, private http: HttpClient, private menuController: MenuController) {
+  constructor(private authService: AuthService, 
+    private http: HttpClient, private menuController: MenuController, private dataManager: DataManagerService) {
 
   }
 
@@ -36,7 +40,7 @@ export class SideMenuPage implements OnInit {
     this._username = this.authService.username;
     this._role = this.authService.role;
 
-    const SERVER_URL = `http://127.0.0.1:8000/api/agencyProfile/`;
+    const SERVER_URL = `http://192.168.1.103:8000/api/agencyProfile/`;
 
     const HEADERS = {
       headers: {
@@ -46,17 +50,18 @@ export class SideMenuPage implements OnInit {
 
     this.http.get(SERVER_URL, HEADERS).subscribe(response => {
 
-      this.agencyStaffProfile = response['agencyStaffProfile'] 
-      
-
       console.log(response);
+
+      this.agencyStaffProfile = response['agencyStaffProfile'];
+
+
+      this.dataManager.data = this.agencyStaffProfile.firstName + " " + this.agencyStaffProfile.lastName;
+      
+            
     }, error => {
       console.log(error);
     });
-    
-    
-    
-
+  
 
   }
 
@@ -65,7 +70,7 @@ export class SideMenuPage implements OnInit {
     console.log(this.authService.token);
     console.log(this.agencyStaffProfile); //
 
-    const SERVER_URL = `http://127.0.0.1:8000/api/agencyProfile/`;
+    const SERVER_URL = `http://192.168.1.103:8000/api/agencyProfile/`;
 
     const HEADERS = {
       headers: {
@@ -79,6 +84,8 @@ export class SideMenuPage implements OnInit {
 
     this.http.post(SERVER_URL, BODY, HEADERS).subscribe(response => {
       console.log(response);
+
+      this.dataManager.data = this.agencyStaffProfile.firstName + " " + this.agencyStaffProfile.lastName;
     }, error => {
       console.log(error);
     })

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Printer } from '@ionic-native/printer/ngx';
 import { loadModules } from "esri-loader";
 
 @Component({

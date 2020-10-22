@@ -10,6 +10,10 @@ export class TabBarPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    console.log("TabBarPage initiated");
+
+
   }
 
 }
