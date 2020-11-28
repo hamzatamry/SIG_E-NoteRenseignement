@@ -11,7 +11,7 @@
       <ion-col size-md="6" offset-md="3">
         <ion-segment #segment value="r">
           <ion-segment-button value="p">
-            <ion-spinner name="lines"></ion-spinner>
+            <ion-icon name="alert-circle-sharp"></ion-icon>
             En attente
           </ion-segment-button>
           <ion-segment-button value="v">
@@ -46,59 +46,6 @@
                 </ion-item>
               </ion-card-content>
             </ion-card>
-            
-
-            <!-- <ion-card >
-              <ion-card-header>
-                <ion-card-title>Numero de la demande {{ request.id }}</ion-card-title>
-                <ion-card-subtitle>Date d'envoi {{ request.sendingDate }}</ion-card-subtitle>
-              </ion-card-header>
-              
-              <!-- <ion-card-content>
-                <ion-item-divider color="primary">
-                  <ion-label>Identité du demandeur</ion-label>
-                </ion-item-divider>
-                <ion-list>
-                  <ion-item>
-                    <ion-label position="stacked">Nom</ion-label>
-                    <ion-text>{{ request.requesterInformationNote.lastName }}</ion-text>
-                  </ion-item>
-        
-                  <ion-item>
-                    <ion-label position="stacked">Prénom</ion-label>
-                    <ion-text>{{ request.requesterInformationNote.firstName }}</ion-text>
-                  </ion-item>
-        
-                  <ion-item>
-                    <ion-label position="stacked">Carte d'Indentité Nationale (CIN)</ion-label>
-                    <ion-text>{{ request.requesterInformationNote.nationalIdCard }}</ion-text>
-                  </ion-item>
-        
-                  <ion-item>
-                    <ion-label position="stacked">Profession</ion-label>
-                    <ion-text>{{ request.requesterInformationNote.profession }}</ion-text>
-                  </ion-item>
-
-                  <ion-item-group>
-                    <ion-item-divider color="primary">
-                      <ion-label>Coordonnées</ion-label>
-                    </ion-item-divider>
-                    <ion-item>
-                      <ion-label position="stacked">Email</ion-label>
-                      <ion-text>{{ request.requesterInformationNote.email }}</ion-text>
-                    </ion-item>
-                    
-                    <ion-item>
-                      <ion-label position="stacked">Numéro de téléphone</ion-label>
-                      <ion-text>{{ request.requesterInformationNote.phoneNumber }}</ion-text>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label position="stacked">Adresse</ion-label>
-                      <ion-text>{{ request.requesterInformationNote.address }}</ion-text>
-                    </ion-item>
-                  </ion-item-group>
-                </ion-list> -->
-            <!-- </ion-card> --> 
           </ng-container>
         </ion-list>
       </ion-col>

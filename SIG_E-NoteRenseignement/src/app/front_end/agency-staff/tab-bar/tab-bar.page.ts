@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab-bar',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabBarPage implements OnInit {
 
-  constructor() { }
+  constructor(public platform: Platform) { }
 
   ngOnInit() {
+
 
     console.log("TabBarPage initiated");
 

@@ -8,18 +8,22 @@
 </ion-header>
 
 <ion-content>
+  
   <ion-grid>
     <ion-row> 
       <ion-col>
         <ion-slides #slides pager="true">
 
           <ion-slide>
-            <ion-card>
+            <ion-card id="guide">
               <ion-card-header>
-                <ion-card-title>slide1</ion-card-title>
+                <ion-card-title>Bienvenue à l'Agence Urbaine de Settat</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                <p>izejzieio</p>
+              <ion-card-content >
+                <p>
+                  Voulez vous envoyer une demande de note de renseignement à l'Agence urbaine de Settat?
+                  Suivez ce guide (Faire bouger le slide et lire attentivement les consignes)
+                </p>
               </ion-card-content>
             </ion-card>
           </ion-slide>
@@ -27,10 +31,11 @@
           <ion-slide>
             <ion-card>
               <ion-card-header>
-                <ion-card-title>Slide2</ion-card-title>
+                <ion-card-title>Lire attentivement les 4 étapes à suivre</ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <p>izejzieio</p>
+                <img src="../../../../assets/icon/lire_guide.jpg" height="20px" width="30px" />
               </ion-card-content>
             </ion-card>
           </ion-slide>
@@ -38,10 +43,11 @@
           <ion-slide>
             <ion-card>
               <ion-card-header>
-                <ion-card-title>Slide3</ion-card-title>
+                <ion-card-title>Toute Information Incorrecte inscrite sur la demande</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <p>izejzieio</p>
+                <p>N'oubliez par de vérifier chaque fois vos données</p>
+                <img src="../../../../assets/icon/dem_rejete.jpg" />
               </ion-card-content>
             </ion-card>
           </ion-slide>
@@ -49,10 +55,14 @@
           <ion-slide>
             <ion-card>
               <ion-card-header>
-                <ion-card-title>Slide4</ion-card-title>
+                <ion-card-title>
+                  Toute demande envoyée aura un délai de 3 jours. 
+                  Au cours de ce délai vous ne pourriez plus envoyer une autre demande 
+                </ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <p>izejzieio</p>
+                <img src="../../../../assets/icon/rejected.png">
               </ion-card-content>
             </ion-card>
           </ion-slide>
@@ -62,27 +72,29 @@
     </ion-row>
     <ion-row>
       <ion-col size-md="6">
-        <ion-card>
+        <ion-card button>
           <ion-card-header>
-            <ion-card-title>Card1</ion-card-title>
+            <ion-card-title>1. Aller vers la page E-Note</ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <p>
-              zjezjeizejgoize
-            </p>
+          <ion-card-content id="E_Note">
+            ____________________
+
+            ___________________
+
           </ion-card-content>
         </ion-card>
       </ion-col>
         
       <ion-col size-md="6">
-        <ion-card>
+        <ion-card button>
           <ion-card-header>
-            <ion-card-title>Card2</ion-card-title>
+            <ion-card-title>2. Ajouter votre données personnelles</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>
-              zjezjeizejgoize
-            </p>
+            <ol>
+              <li>Renseigner votre nom, prénom, CIN</li>
+              <li>Cliquer sur l'icon</li>
+            </ol>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -90,18 +102,29 @@
 
     <ion-row>
       <ion-col size-md="6">
-        <ion-card>
+        <ion-card button> 
           <ion-card-header>
-            <ion-card-title>Card3</ion-card-title>
+            <ion-card-title>3. Ajouter les renseignement sur votre terrain</ion-card-title>
           </ion-card-header>
+          <ion-card-content>
+            <p>
+              N'oublier pas de joindre les documents correctements, tout document
+            </p>
+          </ion-card-content>
         </ion-card>
       </ion-col>
 
       <ion-col size-md="6">
-        <ion-card>
+        <ion-card button>
           <ion-card-header>
-            <ion-card-title>Card4</ion-card-title>
+            <ion-card-title>4. Remplir minutieusement le tableau de contenance </ion-card-title>
           </ion-card-header>
+          <ion-card-content>
+            <ol>
+              <li>Veuillez copier les coordonnées du document (Calcul de contenance)</li>
+              <li>Vérifier chaque donnée saisie</li>
+            </ol>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>

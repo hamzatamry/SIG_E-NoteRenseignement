@@ -1,5 +1,3 @@
-
-
 @media screen and (min-width: 400px)
 {
     
@@ -36,3 +34,21 @@ ion-content {
     }
 }
 
+#guide {
+    background-image: url('../../../../assets/icon/guide.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#E_Note {
+    background-image: url('../../../../assets/icon/dem_rejete.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}

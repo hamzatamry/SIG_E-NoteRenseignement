@@ -9,6 +9,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { ActivatedRoute, Event } from '@angular/router';
 import { DataManagerService } from '../data-manager.service';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-home',
@@ -40,12 +41,11 @@ export class HomePage implements OnInit {
     this.menuController.enable(true, 'profile');
 
     this.loadPublications();
-
   }
 
   loadPublications(event?) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/publication/${this.publications.length}`;
+    const SERVER_URL = SERVER_ADDRESS + `api/publication/${this.publications.length}`;
 
     const HEADERS = {
       headers: {
@@ -115,7 +115,7 @@ export class HomePage implements OnInit {
       description: publishForm.value.text,
     }
 
-    const SERVER_URL = "http://192.168.1.103:8000/api/publication/";
+    const SERVER_URL = SERVER_ADDRESS + "api/publication/";
 
 
     const HEADERS = {
@@ -159,7 +159,8 @@ export class HomePage implements OnInit {
     console.log(this.authService.token);
 
     if (event.keyCode == '13') {
-      const SERVER_URL = "http://192.168.1.103:8000/api/comment/";
+
+      const SERVER_URL = SERVER_ADDRESS + "api/comment/";
 
       const HEADERS = {
         headers: {
@@ -209,7 +210,7 @@ export class HomePage implements OnInit {
     
   downloadFileFromMobile(file_id: number, file_name: string) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/publishedFile/${file_id}/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/publishedFile/${file_id}/`;
 
     let path = null;
 
@@ -251,7 +252,7 @@ export class HomePage implements OnInit {
 
   downloadFileFromBrowser(file_id: number) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/publishedFile/${file_id}/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/publishedFile/${file_id}/`;
 
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 

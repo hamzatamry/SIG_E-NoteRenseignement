@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     File,
     FileTransfer,
     FileOpener,
+    BarcodeScanner
   ],
   bootstrap: [AppComponent]
 })

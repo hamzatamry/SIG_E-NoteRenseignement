@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 import { DataManagerService } from '../data-manager.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class NotePage implements OnInit {
 
   loadMoreNoteRequests(event?) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/noteRequestInformation/${this.requestInformationNotes.length}`;
+    const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformation/${this.requestInformationNotes.length}`;
 
     const HEADERS = {
       headers: {

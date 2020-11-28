@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { NgForm } from '@angular/forms';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -45,7 +46,7 @@ export class VerificationPage implements OnInit {
       
       this.request.id = observer['note_id'];
 
-      const SERVER_URL = `http://192.168.1.103:8000/api/noteRequestInformationDetail/${this.request.id}`;
+      const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformationDetail/${this.request.id}`;
       
       const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
@@ -92,10 +93,9 @@ export class VerificationPage implements OnInit {
 
   }
 
-
   downloadFileFromBrowser(queryParamValue: string) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/requestFile/${this.request.id}/`;
+    const SERVER_URL =  SERVER_ADDRESS + `api/requestFile/${this.request.id}/`;
 
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token)
     const HTTPPARAMS = new HttpParams().set('file_type', queryParamValue);
@@ -116,10 +116,9 @@ export class VerificationPage implements OnInit {
 
   }
 
-  
   downloadFileFromMobile(queryParamValue: string, file_name: string) {
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/requestFile/${this.request.id}/?file_type=${queryParamValue}`;
+    const SERVER_URL = SERVER_ADDRESS + `api/requestFile/${this.request.id}/?file_type=${queryParamValue}`;
 
     let path = null;
 
@@ -187,7 +186,7 @@ export class VerificationPage implements OnInit {
       return ;
     }
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/informationNote/${this.request.id}/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/informationNote/${this.request.id}/`;
 
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
@@ -197,16 +196,7 @@ export class VerificationPage implements OnInit {
       console.log(response);
 
       this.docDefinition = {
-        content: [
-          { text: 'REMINDER', style: 'header' },
-          { text: new Date().toTimeString(), alignment: 'right' },
-   
-          { text: 'From', style: 'subheader' },
-          { text: "gzegzeg" },
-   
-          { text: 'To', style: 'subheader' },
-          { text: "zgzegze", style: 'story', margin: [0, 20, 0, 20] },
-        ],
+        
       }
 
       this.createPdf();
@@ -245,7 +235,7 @@ export class VerificationPage implements OnInit {
       return ;
     }
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/noteRequestInformation/${this.request.id}/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformation/${this.request.id}/`;
 
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
@@ -267,7 +257,7 @@ export class VerificationPage implements OnInit {
       return;
     }
 
-    const SERVER_URL = "http://192.168.1.103:8000/api/informationNote/";
+    const SERVER_URL = SERVER_ADDRESS + "api/informationNote/";
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
     console.log(this.informationNote);

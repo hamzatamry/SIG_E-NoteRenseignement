@@ -9,8 +9,16 @@ const routes: Routes = [
     component: TabBarPage,
     children: [
       {
+        path: 'scanner',
+        loadChildren: () => import('../scanner/scanner.module').then(m => m.ScannerPageModule)
+      },
+      {
         path: 'side-menu',
         loadChildren: () => import('../side-menu/side-menu.module').then(m => m.SideMenuPageModule)
+      },
+      {
+        path: 'action-menu',
+        loadChildren: () => import('../action-menu/action-menu.module').then(m => m.ActionMenuPageModule),
       },
       {
         path: 'note',

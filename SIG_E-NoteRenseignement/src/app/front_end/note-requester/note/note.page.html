@@ -5,12 +5,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-segment #segment value="r">
+    <ion-segment-button value="r">Ajout de demande</ion-segment-button>
+    <ion-segment-button value="n">Demandes envoyées</ion-segment-button>
+  </ion-segment>
 
   <ion-grid>
     <ion-row>
-      <ion-col style="border: unset;" size="6" offset-md="3">
-        <form [formGroup]="requestForm" (ngSubmit)="upload()">
-          <ion-slides #slides pager="true">
+      <ion-col style="border: unset;" size-md="6" offset-md="3">
+
+        <form *ngIf="segment.value == 'r'" [formGroup]="requestForm" (ngSubmit)="upload()">
+          <ion-slides #slides pager="true" (keydown)="trapTabKey($event)">
             <ion-slide formGroupName="requesterForm">
               <ion-card>
                 <ion-card-header>
@@ -306,6 +311,22 @@
             </ion-slide>
           </ion-slides>
         </form>
+
+        <ng-container *ngIf="segment.value == 'n'" >
+          <ion-card button *ngFor="let request of noteInformationRequests">
+            <ion-card-header>
+              <ion-card-title>Demande de note N° {{ request.id }}</ion-card-title>
+            </ion-card-header>
+  
+            <ion-card-content>
+                <ion-item>
+                  <ion-label position="stacked">{{ request.sendingDate }}</ion-label>
+                  <ion-text>{{ request.state }}</ion-text>
+                </ion-item>
+            </ion-card-content>
+  
+          </ion-card>
+        </ng-container>
       </ion-col>
     </ion-row>
   </ion-grid>

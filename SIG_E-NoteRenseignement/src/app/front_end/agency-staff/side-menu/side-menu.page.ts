@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 import { DataManagerService } from '../data-manager.service';
 
 
@@ -34,13 +33,14 @@ export class SideMenuPage implements OnInit {
   }
 
   ngOnInit() {
+    
 
     console.log(this.authService.token);
     
     this._username = this.authService.username;
     this._role = this.authService.role;
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/agencyProfile/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/agencyProfile/`;
 
     const HEADERS = {
       headers: {
@@ -65,12 +65,16 @@ export class SideMenuPage implements OnInit {
 
   }
 
+  ionViewWillEnter() {
+    this.menuController.enable(true, 'profile');
+  }
+
   onSubmit() {
 
     console.log(this.authService.token);
     console.log(this.agencyStaffProfile); //
 
-    const SERVER_URL = `http://192.168.1.103:8000/api/agencyProfile/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/agencyProfile/`;
 
     const HEADERS = {
       headers: {

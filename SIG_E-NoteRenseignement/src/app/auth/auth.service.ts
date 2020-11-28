@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class AuthService {
   signUp(username: string, password: string, role: string, agencyKey?: string) {
 
 
-    const SERVER_URL = "http://192.168.1.103/api/register/";
+    const SERVER_URL = SERVER_ADDRESS + "api/register/";
     
     
     const BODY = {
@@ -80,7 +81,7 @@ export class AuthService {
 
   login(username: string, password: string, role: string) {
 
-    const SERVER_URL = "http://192.168.1.103:8000/auth/"
+    const SERVER_URL = SERVER_ADDRESS + "auth/";
     
     const BODY = {
       username: username,
