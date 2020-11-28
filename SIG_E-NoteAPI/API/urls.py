@@ -6,7 +6,13 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register('register', RegistrationView)
 router.register('noteRequestInformation', RequestInformationNoteView)
-router.register('AgencyProfile', AgencyProfileView)
+router.register('noteRequestInformationDetail', RequestInformationNoteDetailView)
+router.register('agencyProfile', AgencyProfileView)
+router.register('publication', PublicationView)
+router.register('comment', CommentView)
+router.register('publishedFile', PublishedFileView)
+router.register('requestFile', RequestFileView)
+router.register('informationNote', InformationNoteView)
 
 
 urlpatterns = [

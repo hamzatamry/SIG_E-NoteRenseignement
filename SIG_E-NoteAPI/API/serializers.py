@@ -23,6 +23,13 @@ class RequesterInformationNoteSerializer(serializers.ModelSerializer):
         fields = ('id', 'nationalIdCard', 'lastName', 'firstName', 'profession', 'address', 'phoneNumber', 'email')
 
 
+class AgencyStaffMiniSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AgencyStaff
+        fields = ('id', 'lastName', 'firstName', 'department')
+
+
 class AgencyStaffSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -31,29 +38,82 @@ class AgencyStaffSerializer(serializers.ModelSerializer):
 
 
 class RequestInformationNoteSerializer(serializers.ModelSerializer):
-    requesterInformationNote = RequesterInformationNoteSerializer(many=False)
 
     class Meta:
         model = RequestInformationNote
-        fields = ('id', 'state', 'sendingDate', 'requesterInformationNote')
+        fields = ('id', 'state', 'sendingDate')
 
 
-class FieldInformationSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = FieldInformation
-        fields = ('id', 'groundInformationSector', 'municipality', 'landTitleNumber', 'requisitionNumber', 'calledProperty', 'capacityCalculation')
-
-
-class AttachedDocumentSerializer(serializers.ModelSerializer):
+class RequestInformationNoteDetailSerializer(serializers.ModelSerializer):
+    requesterInformationNote = RequesterInformationNoteSerializer(many=False)
+    requestInformationNote = serializers.SerializerMethodField()
+    ownershipCertificate = serializers.SerializerMethodField()
+    cadatralMap = serializers.SerializerMethodField()
+    nationalIdCard = serializers.SerializerMethodField()
 
     class Meta:
-        model = AttachedDocument
-        fields = ('id', 'nationalIdCard', 'ownershipCertificate', 'cadatralMap', 'capacityCalculation')
+        model = RequestInformationNote
+        fields = ('requesterInformationNote', 'groundInformationSector', 'municipality', 'landTitleNumber',
+                  'requisitionNumber', 'calledProperty', 'requestInformationNote', 'ownershipCertificate',
+                  'cadatralMap', 'nationalIdCard', 'rejection_message')
+
+    def get_requestInformationNote(self, instance):
+        return instance.requestInformationNote.name[9:]
+
+    def get_ownershipCertificate(self, instance):
+        return instance.ownershipCertificate.name[8:]
+
+    def get_cadatralMap(self, instance):
+        return instance.cadatralMap.name[8:]
+
+    def get_nationalIdCard(self, instance):
+        return instance.nationalIdCard.name[9:]
 
 
-class RequestInformationContentSerializer(serializers.ModelSerializer):
+class RequestInformationNoteFieldSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = RequestInformationContent
-        fields = ('id', 'requestInformationNote', 'fieldInformation', 'attachedDocument')
+        model = RequestInformationNote
+        fields = ('groundInformationSector', 'municipality', 'landTitleNumber', 'requisitionNumber', 'calledProperty', 'capacityCalculation')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    agencyStaff = AgencyStaffMiniSerializer(many=False)
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'date', 'message', 'agencyStaff')
+
+
+class PublishedFileSerializer(serializers.ModelSerializer):
+    file = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PublishedFile
+        fields = ('id', 'file')
+
+    def get_file(self, instance):
+        return instance.file.name[4:]
+
+
+class PublicationSerializer(serializers.ModelSerializer):
+    agencyStaff = AgencyStaffMiniSerializer(many=False)
+    comments = CommentSerializer(many=True)
+    files = PublishedFileSerializer(many=True)
+
+    class Meta:
+        model = Publication
+        fields = ('id', 'title', 'date', 'description', 'agencyStaff', 'comments', 'files')
+
+
+class InformationNoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = InformationNote
+        fields = ('id', 'date', 'document')
+
+
+
+
+
+
