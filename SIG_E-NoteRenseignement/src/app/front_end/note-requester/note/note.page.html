@@ -5,9 +5,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment #segment value="r">
-    <ion-segment-button value="r">Ajout de demande</ion-segment-button>
-    <ion-segment-button value="n">Demandes envoyées</ion-segment-button>
+  <ion-segment #segment value="n">
+    <ion-segment-button value="r">
+      <ion-icon name="send-sharp"></ion-icon>
+      Ajout d'une nouvelle demande
+    </ion-segment-button>
+    <ion-segment-button value="n">
+      <ion-icon name="folder-sharp"></ion-icon>
+      Demandes envoyées
+    </ion-segment-button>
   </ion-segment>
 
   <ion-grid>
@@ -313,20 +319,39 @@
         </form>
 
         <ng-container *ngIf="segment.value == 'n'" >
-          <ion-card button *ngFor="let request of noteInformationRequests">
+
+          <ion-card 
+            *ngFor="let request of noteInformationRequests" 
+            [routerLink]="getRoute(request.state, request.requestInformationNote)" >
+
             <ion-card-header>
-              <ion-card-title>Demande de note N° {{ request.id }}</ion-card-title>
+              <ion-card-title>Demande de note N° {{ request.requestInformationNote }}</ion-card-title>
             </ion-card-header>
   
             <ion-card-content>
+              <ion-list>
+
                 <ion-item>
-                  <ion-label position="stacked">{{ request.sendingDate }}</ion-label>
-                  <ion-text>{{ request.state }}</ion-text>
+                  <ion-label position="stacked">Etat de la demande</ion-label>
+                  <ion-text>{{ getRequestStatus(request.state) }}</ion-text>
                 </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">{{ request.state == 'p' ? "Date d'envoi" : "Date de vérification"}} </ion-label>
+                  <ion-text>{{ request.verification_date }}</ion-text>
+                </ion-item>
+
+                <ion-item *ngIf="request.state == 'r'">
+                  <ion-label position="stacked">Message de rejet</ion-label>
+                  <ion-text>{{ request.rejection_message }}</ion-text>
+                </ion-item>
+              </ion-list>
+
+
             </ion-card-content>
-  
           </ion-card>
         </ng-container>
+
       </ion-col>
     </ion-row>
   </ion-grid>

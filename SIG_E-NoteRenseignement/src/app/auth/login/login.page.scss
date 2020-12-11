@@ -1,6 +1,11 @@
 ion-grid {
     height: 100%;
 }
+
+ion-content {
+    --background: var(--ion-color-dark);
+}
+
 ion-row {
     display: flex;
     align-items: center;

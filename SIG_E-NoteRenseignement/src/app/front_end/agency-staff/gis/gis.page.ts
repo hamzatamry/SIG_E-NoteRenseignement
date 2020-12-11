@@ -25,11 +25,12 @@ export class GisPage implements OnInit {
 
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [Map, MapView, Locate, ScaleBar] = await loadModules([
+      const [Map, MapView, Locate, ScaleBar,
+        Graphic, GraphicsLayer] = await loadModules([
         "esri/Map", 
         "esri/views/MapView", 
         "esri/widgets/Locate",
-        "esri/widgets/ScaleBar"
+        "esri/widgets/ScaleBar",
       ]);
 
       // Configure the Map
@@ -101,7 +102,9 @@ export class GisPage implements OnInit {
     console.log(GisPage.view);
     
   }
-
+  
+  async drawPoint() {
+  }
 
   async print() {
     const [Print] = await loadModules(["esri/widgets/Print"]);

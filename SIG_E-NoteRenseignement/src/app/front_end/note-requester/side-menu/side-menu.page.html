@@ -2,7 +2,10 @@
   <ion-menu contentId="content" menuId="side">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Compte</ion-title>
+        <ion-title>
+          <ion-icon name="people-circle-sharp" size="2em"></ion-icon>
+          Compte
+        </ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -14,7 +17,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Role</ion-label>
-          <ion-text>{{ this.authService.role === "c" ? "Client": "Personnel de l'AUS" }}</ion-text>
+          <ion-text>{{ this.authService.role === "nr" ? "Demandeur de note": "Personnel de l'AUS" }}</ion-text>
         </ion-item>
       </ion-item-group>
         <div>

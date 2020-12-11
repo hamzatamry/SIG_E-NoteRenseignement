@@ -102,6 +102,9 @@ export class GisPage implements OnInit {
     
   }
 
+  async drawPoint() {
+    
+  }
 
   async print() {
     const [Print] = await loadModules(["esri/widgets/Print"]);

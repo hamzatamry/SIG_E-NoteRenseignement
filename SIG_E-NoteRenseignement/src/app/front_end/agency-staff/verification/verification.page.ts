@@ -235,7 +235,7 @@ export class VerificationPage implements OnInit {
       return ;
     }
 
-    const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformation/${this.request.id}/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/requestNoteVerification/${this.request.id}/`;
 
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
@@ -264,6 +264,7 @@ export class VerificationPage implements OnInit {
 
     let formData = new FormData();
     
+    formData.append('noteInformationRequester', this.requestDetail.requesterInformationNote.id);
     formData.append('document', this.informationNote);
     formData.append('upload_key', JSON.stringify(informationNoteForm.value.upload_key));
   
@@ -286,6 +287,7 @@ export class VerificationPage implements OnInit {
 
 
 interface RequesterInformationNote {
+  id?: string;
   nationalIdCard?: string;
   lastName?: string;
   firstName?: string;
@@ -306,5 +308,4 @@ interface RequestInformationNoteDetail {
   ownershipCertificate?: string;
   cadatralMap?: string;
   nationalIdCard?: string;
-  rejection_message?: string;
 }

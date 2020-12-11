@@ -6,7 +6,12 @@ import { NotePage } from './note.page';
 const routes: Routes = [
   {
     path: '',
-    component: NotePage
+    component: NotePage,
+  },
+  {
+    path: 'note_renseignement/:id',
+    loadChildren: () => import("../note-renseignement/note-renseignement.module")
+    .then(m => m.NoteRenseignementPageModule)
   }
 ];
 

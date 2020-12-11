@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=".."></ion-back-button>
+    </ion-buttons>
+    <ion-title>Note de renseignement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Numero de note de renseignement</ion-label>
+          <ion-text>{{ this.informationNote.id }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Date d'ajout</ion-label>
+          <ion-text>{{ this.informationNote.date }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Note de renseignement</ion-label>
+          <ion-text>{{ this.informationNote.document }}</ion-text>
+        </ion-item>
+      </ion-list>
+      <div>
+        <ion-button (click)="downloadFile()">Télécharger la note</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+</ion-content>

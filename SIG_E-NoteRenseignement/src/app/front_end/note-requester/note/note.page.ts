@@ -7,6 +7,7 @@ import { FileTransfer} from '@ionic-native/file-transfer/ngx';
 import { Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SERVER_ADDRESS } from 'src/environments/environment.prod';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class NotePage implements OnInit {
   @ViewChild('slides') slides: HTMLIonSlidesElement;
   requestForm: FormGroup;
   selectedFiles: any[] = [null, null, null, null];
-  noteInformationRequests: RequestInformationNote[] = [];
+  noteInformationRequests: any[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService, 
     private platform: Platform, private file: File, 
@@ -32,13 +33,18 @@ export class NotePage implements OnInit {
 
     this.setRequestForm();
 
-    const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformation/`;
+    const SERVER_URL = SERVER_ADDRESS + `api/requestNoteVerification/`;
     const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
 
-    this.http.get<RequestInformationNote[]>(SERVER_URL, { headers: HEADERS}).subscribe(response => {
-      console.log(response);
+    this.http.get<RequestInformationNote[]>(SERVER_URL, { headers: HEADERS})
+    .pipe(
+      map(response => {
+        return response['verifications'];
+      }))
+    .subscribe(mappedResponse => {
+      console.log(mappedResponse);
 
-      this.noteInformationRequests = response;
+      this.noteInformationRequests = mappedResponse;
 
     }, error => {
       console.log(error);
@@ -173,16 +179,12 @@ export class NotePage implements OnInit {
 
   
     formData.append('data', JSON.stringify(this.requestForm.value));
-
-    const SERVER_URL = "http://192.168.1.103:8000/api/noteRequestInformation/";
     
-    const headers = {
-      headers: {
-        Authorization: "Token " + this.authService.token
-      }
-    }
+    const SERVER_URL = SERVER_ADDRESS + "api/noteRequestInformation/";
 
-    this.http.post(SERVER_URL, formData, headers)
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
+
+    this.http.post(SERVER_URL, formData, { headers: HEADERS })
     .subscribe(response => {
       console.log(response);
     }, error => {
@@ -192,90 +194,32 @@ export class NotePage implements OnInit {
 
   }
 
-  downloadFile(file_id: number, file_name: string) {
 
-    console.log("waiting to download file" + "id = " + file_id);
+  getRoute(state: string, numero_note: string) {
 
-    if (this.platform.is("android") || this.platform.is("ios")) {
-
-      this.downloadFileFromMobile(file_id, file_name);
-    }
-    else {
-      this.downloadFileFromBrowser(file_id);
+    if (state == 'v') {
+      return ['note_renseignement', numero_note];
     }
 
+    return [];
   }
+
+  getRequestStatus(state: string) {
+
+    switch (state) {
+      case "v": return "Valide" 
+      case "p": return "En progression"
+      case "r": return "Rejetée"
+    }
     
-  downloadFileFromMobile(file_id: number, file_name: string) {
-
-    const SERVER_URL = `http://192.168.1.103:8000/api/informationNote/${file_id}/`;
-
-    let path = null;
-
-    if (this.platform.is("ios")) {
-      path = this.file.documentsDirectory;
-    }
-    else {
-      path = this.file.dataDirectory;
-    }
-
-    this.file.checkFile(path, file_name).then(found => {
-
-      const url = path + file_name;
-
-      this.opener.open(url, 'application/pdf').then(() => console.log('File is opened')).catch(e => console.log());
-
-    }).catch(error => {
-      
-      const transfer = this.transfer.create();
-
-      const options = {
-        headers: { 'Authorization': 'Token ' + this.authService.token },
-      }
-
-      transfer.download(SERVER_URL, path + file_name, true, options)
-      .then(entry => {
-        
-        const url = entry.toURL();
-
-        this.opener.open(url, 'application/pdf')
-        .then(() => console.log('File is opened'))
-        .catch(e => alert('error2'))
-
-      }).catch(error => {
-        console.log(error);
-        })
-      })
-  }
-
-  downloadFileFromBrowser(file_id: number) {
-
-    const SERVER_URL = `http://192.168.1.103:8000/api/informationNote/${file_id}/`;
-
-    const HEADERS = new HttpHeaders().set('Authorization', 'Token ' + this.authService.token);
-
-  
-    this.http.get(SERVER_URL, { headers: HEADERS, responseType: 'blob'}).subscribe(response => {
-      
-      console.log(response);
-
-      const blob = new Blob([response], {type: 'application/pdf'});
-
-      const downloadURL = window.URL.createObjectURL(blob);
-
-      window.open(downloadURL);
-
-    }, error => {
-      console.log(error);
-    });
-
   }
 
 }
 
 
 interface RequestInformationNote {
-  id?: number;
+  requestInformationNote?: string;
   state?: string;
-  sendingDate?: string;
+  verification_date?: string;
+  rejection_message?: string;
 }

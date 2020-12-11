@@ -6,9 +6,6 @@
     }
 }
 
-
-
-
 ion-content {
     ion-grid {
         height: 100%;
@@ -17,11 +14,15 @@ ion-content {
             ion-col {
                 height: 100% !important;
                 ion-card {
+                    background: #fff url('../../../../assets/icon/agence_urbaine.jfif') no-repeat center cover;
+                    background-color: transparent!important;
                     text-align: center !important;
+                    color: white !important;
                     width: 100% !important;
                     height: 100% !important;
                     margin: 0 !important;
-                    border: 2px var(--ion-color-success-shade) solid !important;
+                    border: 2px white solid !important;
+                    
                 }
                 ion-slides {
                     text-align: center !important;

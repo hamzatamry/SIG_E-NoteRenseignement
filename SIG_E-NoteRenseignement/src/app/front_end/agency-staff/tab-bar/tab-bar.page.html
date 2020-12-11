@@ -10,7 +10,7 @@
       <ion-label>Demandes de note</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="scanner">
+    <ion-tab-button *ngIf="platform.is('android') || platform.is('ios')" tab="scanner">
       <ion-icon name="scan-sharp"></ion-icon>
       <ion-label>Scanner</ion-label>
     </ion-tab-button>

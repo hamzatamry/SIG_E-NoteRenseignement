@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SERVER_ADDRESS } from 'src/environments/environment.prod';
 import { DataManagerService } from '../data-manager.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-note',
@@ -12,7 +13,7 @@ import { DataManagerService } from '../data-manager.service';
 })
 export class NotePage implements OnInit {
 
-  requestInformationNotes: RequestInformationNote[];
+  requestInformationNotes: RequestInformationVerification[];
 
 
   constructor(private authService: AuthService,
@@ -30,18 +31,24 @@ export class NotePage implements OnInit {
 
   loadMoreNoteRequests(event?) {
 
-    const SERVER_URL = SERVER_ADDRESS + `api/noteRequestInformation/${this.requestInformationNotes.length}`;
+    
+    const SERVER_URL = SERVER_ADDRESS + `api/requestNoteVerification/${this.requestInformationNotes.length}`;
 
-    const HEADERS = {
-      headers: {
-        Authorization: "Token " + this.authService.token
-      }
-    }
+    const HEADERS = new HttpHeaders().set("Authorization", "Token " + this.authService.token);
 
-    this.http.get<RequestInformationNote[]>(SERVER_URL, HEADERS).subscribe(response => {
+
+    this.http.get<RequestInformationVerification[]>(SERVER_URL, { headers: HEADERS })
+    .pipe(
+      map(response => {
+
       console.log(response);
 
-      this.requestInformationNotes = this.requestInformationNotes.concat(response);
+      return response['verifications'];
+
+    }))
+    .subscribe(mappedResponse => {
+      
+      this.requestInformationNotes = this.requestInformationNotes.concat(mappedResponse);
 
       if (event) {
         event.target.complete();
@@ -70,20 +77,18 @@ export class NotePage implements OnInit {
 }
 
 
-interface RequesterInformationNote {
-  nationalIdCard?: string;
+interface AgencyStaff {
+  id?: string;
   lastName?: string;
   firstName?: string;
-  profession?: string;
-  address?: string;
-  phoneNumber?: string;
-  email?: string;
+  department?: string;
 }
 
-
-interface RequestInformationNote {
-  id?: number;
+interface RequestInformationVerification {
+  requestInformationNote?: string;
   state?: string;
-  sendingDate?: string;
-  requesterInformationNote?: RequesterInformationNote;
+  verification_date?: string;
+  rejection_message?: string;
+  agencyStaff?: AgencyStaff;
+  
 }
